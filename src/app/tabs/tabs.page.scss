@@ -1,1 +1,151 @@
+.tabs-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
+.top-desktop-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #0f172a;
+  color: #ffffff;
+  border-bottom: 1px solid #1e293b;
+  z-index: 100;
+
+  @media (max-width: 860px) {
+    display: none; // En móvil se oculta y prevalece la barra inferior de pestañas de Ionic
+  }
+
+  .brand-zone {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .brand-logo {
+      font-size: 1.5rem;
+      background: #2563eb;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+
+      .app-name {
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .app-tag {
+        font-size: 0.72rem;
+        color: #94a3b8;
+      }
+    }
+  }
+
+  .desktop-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .nav-link-item {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover {
+        color: #ffffff;
+        background-color: #1e293b;
+      }
+
+      &.active {
+        background-color: #2563eb;
+        color: #ffffff;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #60a5fa;
+      }
+    }
+  }
+
+  .user-profile-zone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .user-info-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .user-fullname {
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .user-role-badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        background: #334155;
+        color: #f1f5f9;
+
+        &.admin {
+          background: #3b82f6;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #f8fafc;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+
+      &:hover {
+        background: #dc2626;
+        border-color: #dc2626;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #ef4444;
+      }
+    }
+  }
+}
+
+.custom-tab-bar {
+  --background: #ffffff;
+  --border: 1px solid #e2e8f0;
+  border-top: 1px solid #e2e8f0;
+
+  @media (min-width: 861px) {
+    display: none; // En escritorio se muestra el menú superior estructurado
+  }
+
+  ion-tab-button {
+    --color: #64748b;
+    --color-selected: #2563eb;
+    font-size: 0.75rem;
+  }
+}
