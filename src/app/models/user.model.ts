@@ -21,3 +21,4 @@ export interface AuthState {
   role: UserRole | null;
   token: string | null;
 }
+

@@ -160,3 +160,4 @@ Para evidenciar la evolución del software según la rúbrica técnica de correc
 - `feature/dual-backend`: Integración de Supabase (SQL) y Firebase (NoSQL).
 - `feature/dashboard-reports`: Desarrollo del cuadro de mando interactivo y exportación a PDF/CSV.
 - `feature/accessibility-wcag`: Auditoría de accesibilidad WCAG y componentes reutilizables.
+

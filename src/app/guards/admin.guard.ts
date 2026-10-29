@@ -19,3 +19,4 @@ export const adminGuard: CanActivateFn = () => {
   // Si es un usuario estándar, redirige a su área permitida (inventario)
   return router.createUrlTree(['/tabs/inventory']);
 };
+

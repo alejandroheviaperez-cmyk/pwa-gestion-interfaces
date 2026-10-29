@@ -17,3 +17,4 @@ export const authGuard: CanActivateFn = () => {
   // Redirección declarativa al Login
   return router.createUrlTree(['/login']);
 };
+

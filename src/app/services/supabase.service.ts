@@ -245,3 +245,4 @@ export class SupabaseService {
     return [...this.initialSeed];
   }
 }
+

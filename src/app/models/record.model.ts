@@ -23,3 +23,4 @@ export interface TableColumn {
   sortable?: boolean;
   type?: 'text' | 'number' | 'currency' | 'status' | 'date';
 }
+

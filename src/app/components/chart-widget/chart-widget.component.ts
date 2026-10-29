@@ -162,3 +162,4 @@ export class ChartWidgetComponent implements AfterViewInit, OnChanges, OnDestroy
     this.chartInstance = new Chart(ctx, config);
   }
 }
+

@@ -18,3 +18,4 @@ export interface MetricChartData {
   backgroundColor?: string[];
   borderColor?: string;
 }
+
