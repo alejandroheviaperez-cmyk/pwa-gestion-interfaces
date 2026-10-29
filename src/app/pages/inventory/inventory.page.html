@@ -1,0 +1,206 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Gestión de Inventario (Supabase SQL)</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCreateModal()" color="light" fill="solid" class="btn-create-top" aria-label="Crear nuevo registro en Supabase">
+        + Nuevo Registro
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="inventory-content">
+  <main class="inventory-main" role="main">
+    <!-- Encabezado de la vista -->
+    <header class="inventory-header">
+      <div class="header-texts">
+        <h2 class="view-title">Catálogo de Activos y Existencias</h2>
+        <p class="view-desc">
+          Capa de datos consumida asíncronamente desde <strong>Supabase REST API</strong>. Integra validación asíncrona de códigos y control de concurrencia.
+        </p>
+      </div>
+
+      <div class="header-actions">
+        <button 
+          type="button" 
+          class="btn-new-record"
+          (click)="openCreateModal()"
+          aria-label="Dar de alta un nuevo registro empresarial"
+        >
+          <span aria-hidden="true">+</span> Nuevo Registro Empresarial
+        </button>
+      </div>
+    </header>
+
+    <!-- Indicador de Carga -->
+    <div *ngIf="isLoading()" class="loading-state" role="status" aria-live="polite">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Cargando registros desde la API relacional SQL...</p>
+    </div>
+
+    <!-- TABLA REUTILIZABLE (Componente Reutilizable 1 - RA 3) -->
+    <section *ngIf="!isLoading()" aria-label="Listado interactivo de inventario">
+      <app-data-table
+        [data]="records()"
+        [columns]="tableColumns"
+        title="Existencias en Base de Datos SQL"
+        filterPlaceholder="Buscar por código, nombre o categoría..."
+        [pageSize]="7"
+        [canEdit]="true"
+        [canDelete]="authService.isAdmin()"
+        (rowSelect)="handleRowSelect($event)"
+        (rowAction)="handleTableAction($event)"
+      ></app-data-table>
+    </section>
+
+    <!-- MODAL DE ALTA / EDICIÓN CON VALIDACIONES ASÍNCRONAS (RA 2) -->
+    <ion-modal [isOpen]="isModalOpen()" (didDismiss)="closeModal()">
+      <ng-template>
+        <div class="modal-wrapper" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+          <header class="modal-header">
+            <h3 id="modal-title" class="modal-title">
+              {{ editingRecordId() ? 'Modificar Registro' : 'Alta de Nuevo Registro SQL' }}
+            </h3>
+            <button type="button" class="btn-close-modal" (click)="closeModal()" aria-label="Cerrar ventana">
+              ✕
+            </button>
+          </header>
+
+          <form [formGroup]="recordForm" (ngSubmit)="onSaveRecord()" novalidate class="modal-body">
+            <!-- Campo Código con validación asíncrona -->
+            <div class="form-group">
+              <div class="label-row">
+                <label for="inv-codigo" class="form-label">Código Único (SKU)</label>
+                <span 
+                  *ngIf="recordForm.get('codigo')?.pending" 
+                  class="async-verifying"
+                  aria-live="polite"
+                >
+                  ⏳ Comprobando disponibilidad en Supabase...
+                </span>
+              </div>
+              <input 
+                id="inv-codigo"
+                type="text"
+                formControlName="codigo"
+                class="form-control"
+                placeholder="EJ: PRD-5001"
+                [class.is-invalid]="recordForm.get('codigo')?.touched && recordForm.get('codigo')?.invalid"
+                aria-required="true"
+                aria-describedby="code-error"
+              />
+              <div 
+                *ngIf="recordForm.get('codigo')?.touched && recordForm.get('codigo')?.invalid" 
+                id="code-error" 
+                class="field-error"
+                role="alert"
+              >
+                <span *ngIf="recordForm.get('codigo')?.errors?.['required']">El código es obligatorio.</span>
+                <span *ngIf="recordForm.get('codigo')?.errors?.['pattern']">Sólo mayúsculas, números y guiones.</span>
+                <span *ngIf="recordForm.get('codigo')?.errors?.['codeTaken']" class="error-highlight">
+                  ⛔ Este código ya existe en la base de datos (Validación asíncrona RA 2).
+                </span>
+              </div>
+            </div>
+
+            <!-- Campo Nombre -->
+            <div class="form-group">
+              <label for="inv-nombre" class="form-label">Nombre del Activo</label>
+              <input 
+                id="inv-nombre"
+                type="text"
+                formControlName="nombre"
+                class="form-control"
+                placeholder="Nombre descriptivo completo"
+                [class.is-invalid]="recordForm.get('nombre')?.touched && recordForm.get('nombre')?.invalid"
+                aria-required="true"
+              />
+              <div *ngIf="recordForm.get('nombre')?.touched && recordForm.get('nombre')?.invalid" class="field-error">
+                Mínimo 4 caracteres requeridos.
+              </div>
+            </div>
+
+            <!-- Fila Categoría y Estado -->
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inv-categoria" class="form-label">Categoría</label>
+                <select id="inv-categoria" formControlName="categoria" class="form-control">
+                  <option value="Hardware">Hardware</option>
+                  <option value="Software">Software</option>
+                  <option value="Redes">Redes</option>
+                  <option value="Servicios">Servicios</option>
+                  <option value="Periféricos">Periféricos</option>
+                </select>
+              </div>
+
+              <div class="form-group flex-1">
+                <label for="inv-estado" class="form-label">Estado</label>
+                <select id="inv-estado" formControlName="estado" class="form-control">
+                  <option value="Activo">Activo</option>
+                  <option value="Bajo Stock">Bajo Stock</option>
+                  <option value="Agotado">Agotado</option>
+                  <option value="En Revisión">En Revisión</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Fila Precio y Stock -->
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="inv-precio" class="form-label">Precio Unitario (€)</label>
+                <input 
+                  id="inv-precio"
+                  type="number"
+                  step="0.01"
+                  formControlName="precio"
+                  class="form-control"
+                  [class.is-invalid]="recordForm.get('precio')?.touched && recordForm.get('precio')?.invalid"
+                />
+              </div>
+
+              <div class="form-group flex-1">
+                <label for="inv-stock" class="form-label">Unidades en Stock</label>
+                <input 
+                  id="inv-stock"
+                  type="number"
+                  formControlName="stock"
+                  class="form-control"
+                  [class.is-invalid]="recordForm.get('stock')?.touched && recordForm.get('stock')?.invalid"
+                />
+              </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-group">
+              <label for="inv-desc" class="form-label">Descripción Técnica (Opcional)</label>
+              <textarea 
+                id="inv-desc"
+                rows="2"
+                formControlName="descripcion"
+                class="form-control"
+                placeholder="Detalles sobre especificaciones o ubicación..."
+              ></textarea>
+            </div>
+
+            <!-- Botones de Acción -->
+            <footer class="modal-footer">
+              <button type="button" class="btn-cancel" (click)="closeModal()">
+                Cancelar
+              </button>
+              <button 
+                type="submit" 
+                class="btn-save" 
+                [disabled]="recordForm.invalid || isSaving() || recordForm.pending"
+              >
+                <ion-spinner *ngIf="isSaving()" name="crescent" class="btn-spinner"></ion-spinner>
+                <span *ngIf="!isSaving()">
+                  {{ editingRecordId() ? 'Guardar Cambios' : 'Registrar en Supabase' }}
+                </span>
+              </button>
+            </footer>
+          </form>
+        </div>
+      </ng-template>
+    </ion-modal>
+  </main>
+</ion-content>
