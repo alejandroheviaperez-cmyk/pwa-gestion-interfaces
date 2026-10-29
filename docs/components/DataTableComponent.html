@@ -1,0 +1,2148 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-app-gestion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">mi-app-gestion documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DataTableComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/components/data-table/data-table.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente Reutilizable y Agnóstico de Tabla de Datos Avanzada
+Cumplimiento RA 3: Componente independiente que recibe @Input() y emite @Output()
+Optimizado con ChangeDetectionStrategy.OnPush y Angular Signals.</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-data-table</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                        <div>    <code>IonBadge</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./data-table.component.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./data-table.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/InventoryPage.html" target="_self" >InventoryPage</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonBadge</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#_rawData" >_rawData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#filteredData" >filteredData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#paginatedData" >paginatedData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#searchTerm" >searchTerm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#sortAsc" >sortAsc</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#sortKey" >sortKey</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#totalPages" >totalPages</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#emitAction" >emitAction</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getStatusColor" >getStatusColor</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSearchChange" >onSearchChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onSelect" >onSelect</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#setPage" >setPage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#sortBy" >sortBy</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#canDelete" >canDelete</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#canEdit" >canEdit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#columns" >columns</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#data" >data</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#filterPlaceholder" >filterPlaceholder</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#pageSize" >pageSize</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#title" >title</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#rowAction" >rowAction</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#rowSelect" >rowSelect</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Accessors</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--accessor" aria-hidden="true">A</span>
+                                <a href="#data" >data</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canDelete"></a>
+                        <b>canDelete</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/data-table/data-table.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="canEdit"></a>
+                        <b>canEdit</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/data-table/data-table.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="columns"></a>
+                        <b>columns</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/TableColumn.html" target="_self" >TableColumn[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/data-table/data-table.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <b>data</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/data-table/data-table.component.ts:36</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterPlaceholder"></a>
+                        <b>filterPlaceholder</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Buscar por cualquier campo...&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/data-table/data-table.component.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pageSize"></a>
+                        <b>pageSize</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>6</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/data-table/data-table.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <b>title</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;Registros&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/data-table/data-table.component.ts:42</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="rowAction"></a>
+                        <b>rowAction</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/data-table/data-table.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="rowSelect"></a>
+                        <b>rowSelect</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/data-table/data-table.component.ts:48</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emitAction"></a>
+                    <span class="name">
+                        <span ><b>emitAction</b></span>
+                        <a href="#emitAction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>emitAction(action: "edit" | "delete" | "view", item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, event: <a href="https://angular.dev/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/components/data-table/data-table.component.ts:124</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                        <code>&quot;edit&quot; | &quot;delete&quot; | &quot;view&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.dev/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusColor"></a>
+                    <span class="name">
+                        <span ><b>getStatusColor</b></span>
+                        <a href="#getStatusColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusColor(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/components/data-table/data-table.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchChange"></a>
+                    <span class="name">
+                        <span ><b>onSearchChange</b></span>
+                        <a href="#onSearchChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSearchChange(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/components/data-table/data-table.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSelect"></a>
+                    <span class="name">
+                        <span ><b>onSelect</b></span>
+                        <a href="#onSelect"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSelect(item: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/data-table/data-table.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setPage"></a>
+                    <span class="name">
+                        <span ><b>setPage</b></span>
+                        <a href="#setPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setPage(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/components/data-table/data-table.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortBy"></a>
+                    <span class="name">
+                        <span ><b>sortBy</b></span>
+                        <a href="#sortBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortBy(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/components/data-table/data-table.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_rawData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_rawData</b></span>
+                        <a href="#_rawData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;any[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/data-table/data-table.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;number&gt;(1)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/data-table/data-table.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredData"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>filteredData</b></span>
+                        <a href="#filteredData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    let list &#x3D; [...this._rawData()];
+    const term &#x3D; this.searchTerm().trim().toLowerCase();
+
+    if (term) {
+      list &#x3D; list.filter(item &#x3D;&gt; 
+        Object.values(item).some(val &#x3D;&gt; 
+          String(val).toLowerCase().includes(term)
+        )
+      );
+    }
+
+    const key &#x3D; this.sortKey();
+    if (key) {
+      const asc &#x3D; this.sortAsc();
+      list.sort((a, b) &#x3D;&gt; {
+        const valA &#x3D; a[key] ?? &#x27;&#x27;;
+        const valB &#x3D; b[key] ?? &#x27;&#x27;;
+        if (typeof valA &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; typeof valB &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+          return asc ? valA - valB : valB - valA;
+        }
+        return asc 
+          ? String(valA).localeCompare(String(valB)) 
+          : String(valB).localeCompare(String(valA));
+      });
+    }
+
+    return list;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/data-table/data-table.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginatedData"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>paginatedData</b></span>
+                        <a href="#paginatedData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const start &#x3D; (this.currentPage() - 1) * this.pageSize;
+    return this.filteredData().slice(start, start + this.pageSize);
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/components/data-table/data-table.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>searchTerm</b></span>
+                        <a href="#searchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/data-table/data-table.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortAsc"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sortAsc</b></span>
+                        <a href="#sortAsc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/data-table/data-table.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortKey"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sortKey</b></span>
+                        <a href="#sortKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/data-table/data-table.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPages"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>totalPages</b></span>
+                        <a href="#totalPages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    return Math.max(1, Math.ceil(this.filteredData().length / this.pageSize));
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/components/data-table/data-table.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <span class="name"><b>data</b><a href="#data"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>data(value: any[])</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/data-table/data-table.component.ts:36</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                        <code>any[]</code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { 
+  Component, 
+  Input, 
+  Output, 
+  EventEmitter, 
+  ChangeDetectionStrategy, 
+  computed, 
+  signal 
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { 
+  IonBadge 
+} from &#x27;@ionic/angular&#x27;;
+import { TableColumn } from &#x27;../../models/record.model&#x27;;
+
+/**
+ * Componente Reutilizable y Agnóstico de Tabla de Datos Avanzada
+ * Cumplimiento RA 3: Componente independiente que recibe @Input() y emite @Output()
+ * Optimizado con ChangeDetectionStrategy.OnPush y Angular Signals.
+ */
+@Component({
+  selector: &#x27;app-data-table&#x27;,
+  templateUrl: &#x27;./data-table.component.html&#x27;,
+  styleUrls: [&#x27;./data-table.component.scss&#x27;],
+  standalone: true,
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    IonBadge
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DataTableComponent {
+  // Inputs declarativos
+  @Input({ required: true }) set data(value: any[]) {
+    this._rawData.set(value || []);
+    this.currentPage.set(1);
+  }
+  @Input({ required: true }) columns: TableColumn[] &#x3D; [];
+  @Input() pageSize: number &#x3D; 6;
+  @Input() title: string &#x3D; &#x27;Registros&#x27;;
+  @Input() filterPlaceholder: string &#x3D; &#x27;Buscar por cualquier campo...&#x27;;
+  @Input() canEdit: boolean &#x3D; true;
+  @Input() canDelete: boolean &#x3D; true;
+
+  // Outputs personalizados
+  @Output() rowSelect &#x3D; new EventEmitter&lt;any&gt;();
+  @Output() rowAction &#x3D; new EventEmitter&lt;{ action: &#x27;edit&#x27; | &#x27;delete&#x27; | &#x27;view&#x27;; item: any }&gt;();
+
+  // Estado interno reactivo gestionado mediante Signals
+  private _rawData &#x3D; signal&lt;any[]&gt;([]);
+  public searchTerm &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  public sortKey &#x3D; signal&lt;string&gt;(&#x27;&#x27;);
+  public sortAsc &#x3D; signal&lt;boolean&gt;(true);
+  public currentPage &#x3D; signal&lt;number&gt;(1);
+
+  // Computación reactiva: Filtrado + Ordenación
+  public filteredData &#x3D; computed(() &#x3D;&gt; {
+    let list &#x3D; [...this._rawData()];
+    const term &#x3D; this.searchTerm().trim().toLowerCase();
+
+    if (term) {
+      list &#x3D; list.filter(item &#x3D;&gt; 
+        Object.values(item).some(val &#x3D;&gt; 
+          String(val).toLowerCase().includes(term)
+        )
+      );
+    }
+
+    const key &#x3D; this.sortKey();
+    if (key) {
+      const asc &#x3D; this.sortAsc();
+      list.sort((a, b) &#x3D;&gt; {
+        const valA &#x3D; a[key] ?? &#x27;&#x27;;
+        const valB &#x3D; b[key] ?? &#x27;&#x27;;
+        if (typeof valA &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; typeof valB &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+          return asc ? valA - valB : valB - valA;
+        }
+        return asc 
+          ? String(valA).localeCompare(String(valB)) 
+          : String(valB).localeCompare(String(valA));
+      });
+    }
+
+    return list;
+  });
+
+  // Computación reactiva: Paginación
+  public totalPages &#x3D; computed(() &#x3D;&gt; {
+    return Math.max(1, Math.ceil(this.filteredData().length / this.pageSize));
+  });
+
+  public paginatedData &#x3D; computed(() &#x3D;&gt; {
+    const start &#x3D; (this.currentPage() - 1) * this.pageSize;
+    return this.filteredData().slice(start, start + this.pageSize);
+  });
+
+  onSearchChange(event: any): void {
+    const val &#x3D; typeof event &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? event : event?.target?.value ?? &#x27;&#x27;;
+    this.searchTerm.set(val);
+    this.currentPage.set(1);
+  }
+
+  sortBy(key: string): void {
+    if (this.sortKey() &#x3D;&#x3D;&#x3D; key) {
+      this.sortAsc.update(prev &#x3D;&gt; !prev);
+    } else {
+      this.sortKey.set(key);
+      this.sortAsc.set(true);
+    }
+  }
+
+  setPage(page: number): void {
+    if (page &gt;&#x3D; 1 &amp;&amp; page &lt;&#x3D; this.totalPages()) {
+      this.currentPage.set(page);
+    }
+  }
+
+  onSelect(item: any): void {
+    this.rowSelect.emit(item);
+  }
+
+  emitAction(action: &#x27;edit&#x27; | &#x27;delete&#x27; | &#x27;view&#x27;, item: any, event: Event): void {
+    event.stopPropagation();
+    this.rowAction.emit({ action, item });
+  }
+
+  getStatusColor(status: string): string {
+    switch (status) {
+      case &#x27;Activo&#x27;: return &#x27;success&#x27;;
+      case &#x27;Bajo Stock&#x27;: return &#x27;warning&#x27;;
+      case &#x27;Agotado&#x27;: return &#x27;danger&#x27;;
+      case &#x27;En Revisión&#x27;: return &#x27;medium&#x27;;
+      default: return &#x27;primary&#x27;;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;data-table-container&quot; role&#x3D;&quot;region&quot; [attr.aria-label]&#x3D;&quot;title&quot;&gt;
+  &lt;!-- Cabecera de la tabla con buscador y resumen --&gt;
+  &lt;header class&#x3D;&quot;table-header&quot;&gt;
+    &lt;div class&#x3D;&quot;header-info&quot;&gt;
+      &lt;h3 class&#x3D;&quot;table-title&quot;&gt;{{ title }}&lt;/h3&gt;
+      &lt;span class&#x3D;&quot;count-badge&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+        Mostrando {{ filteredData().length }} resultado(s)
+      &lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;search-box&quot;&gt;
+      &lt;label for&#x3D;&quot;table-search-input&quot; class&#x3D;&quot;sr-only&quot;&gt;Buscar en la tabla&lt;/label&gt;
+      &lt;input 
+        id&#x3D;&quot;table-search-input&quot;
+        type&#x3D;&quot;search&quot; 
+        [value]&#x3D;&quot;searchTerm()&quot; 
+        (input)&#x3D;&quot;onSearchChange($event)&quot; 
+        [placeholder]&#x3D;&quot;filterPlaceholder&quot;
+        class&#x3D;&quot;search-input&quot;
+        aria-label&#x3D;&quot;Buscar en la tabla de datos&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;!-- Tabla accesible y responsiva --&gt;
+  &lt;div class&#x3D;&quot;table-responsive-wrapper&quot; tabindex&#x3D;&quot;0&quot; role&#x3D;&quot;region&quot; aria-label&#x3D;&quot;Contenedor de datos tabulados&quot;&gt;
+    &lt;table class&#x3D;&quot;custom-table&quot; role&#x3D;&quot;table&quot;&gt;
+      &lt;thead&gt;
+        &lt;tr role&#x3D;&quot;row&quot;&gt;
+          &lt;th 
+            *ngFor&#x3D;&quot;let col of columns&quot; 
+            role&#x3D;&quot;columnheader&quot; 
+            [attr.aria-sort]&#x3D;&quot;sortKey() &#x3D;&#x3D;&#x3D; col.key ? (sortAsc() ? &#x27;ascending&#x27; : &#x27;descending&#x27;) : &#x27;none&#x27;&quot;
+            (click)&#x3D;&quot;col.sortable !&#x3D;&#x3D; false ? sortBy(col.key) : null&quot;
+            (keydown.enter)&#x3D;&quot;col.sortable !&#x3D;&#x3D; false ? sortBy(col.key) : null&quot;
+            [class.sortable]&#x3D;&quot;col.sortable !&#x3D;&#x3D; false&quot;
+            [attr.tabindex]&#x3D;&quot;col.sortable !&#x3D;&#x3D; false ? 0 : -1&quot;
+            scope&#x3D;&quot;col&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;th-content&quot;&gt;
+              &lt;span&gt;{{ col.header }}&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;col.sortable !&#x3D;&#x3D; false&quot; class&#x3D;&quot;sort-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+                {{ sortKey() &#x3D;&#x3D;&#x3D; col.key ? (sortAsc() ? &#x27;▲&#x27; : &#x27;▼&#x27;) : &#x27;⇅&#x27; }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/th&gt;
+          &lt;th *ngIf&#x3D;&quot;canEdit || canDelete&quot; role&#x3D;&quot;columnheader&quot; scope&#x3D;&quot;col&quot; class&#x3D;&quot;actions-header&quot;&gt;
+            Acciones
+          &lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr 
+          *ngFor&#x3D;&quot;let row of paginatedData()&quot; 
+          role&#x3D;&quot;row&quot; 
+          tabindex&#x3D;&quot;0&quot;
+          (click)&#x3D;&quot;onSelect(row)&quot;
+          (keydown.enter)&#x3D;&quot;onSelect(row)&quot;
+          class&#x3D;&quot;table-row&quot;
+        &gt;
+          &lt;td *ngFor&#x3D;&quot;let col of columns&quot; role&#x3D;&quot;cell&quot;&gt;
+            &lt;!-- Renderizado según tipo de dato --&gt;
+            &lt;ng-container [ngSwitch]&#x3D;&quot;col.type&quot;&gt;
+              &lt;span *ngSwitchCase&#x3D;&quot;&#x27;currency&#x27;&quot; class&#x3D;&quot;price-cell&quot;&gt;
+                €{{ row[col.key] | number:&#x27;1.2-2&#x27; }}
+              &lt;/span&gt;
+
+              &lt;span *ngSwitchCase&#x3D;&quot;&#x27;status&#x27;&quot;&gt;
+                &lt;ion-badge [color]&#x3D;&quot;getStatusColor(row[col.key])&quot; class&#x3D;&quot;status-badge&quot;&gt;
+                  {{ row[col.key] }}
+                &lt;/ion-badge&gt;
+              &lt;/span&gt;
+
+              &lt;span *ngSwitchCase&#x3D;&quot;&#x27;date&#x27;&quot; class&#x3D;&quot;date-cell&quot;&gt;
+                {{ row[col.key] | date:&#x27;shortDate&#x27; }}
+              &lt;/span&gt;
+
+              &lt;span *ngSwitchDefault&gt;
+                {{ row[col.key] }}
+              &lt;/span&gt;
+            &lt;/ng-container&gt;
+          &lt;/td&gt;
+
+          &lt;!-- Celda de acciones de fila --&gt;
+          &lt;td *ngIf&#x3D;&quot;canEdit || canDelete&quot; role&#x3D;&quot;cell&quot; class&#x3D;&quot;actions-cell&quot;&gt;
+            &lt;button 
+              *ngIf&#x3D;&quot;canEdit&quot;
+              type&#x3D;&quot;button&quot;
+              class&#x3D;&quot;btn-action edit&quot;
+              (click)&#x3D;&quot;emitAction(&#x27;edit&#x27;, row, $event)&quot;
+              [attr.aria-label]&#x3D;&quot;&#x27;Editar registro &#x27; + (row.codigo || row.nombre)&quot;
+            &gt;
+              Editar
+            &lt;/button&gt;
+            &lt;button 
+              *ngIf&#x3D;&quot;canDelete&quot;
+              type&#x3D;&quot;button&quot;
+              class&#x3D;&quot;btn-action delete&quot;
+              (click)&#x3D;&quot;emitAction(&#x27;delete&#x27;, row, $event)&quot;
+              [attr.aria-label]&#x3D;&quot;&#x27;Eliminar registro &#x27; + (row.codigo || row.nombre)&quot;
+            &gt;
+              Eliminar
+            &lt;/button&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+
+        &lt;!-- Estado vacío --&gt;
+        &lt;tr *ngIf&#x3D;&quot;paginatedData().length &#x3D;&#x3D;&#x3D; 0&quot; role&#x3D;&quot;row&quot;&gt;
+          &lt;td [attr.colspan]&#x3D;&quot;columns.length + (canEdit || canDelete ? 1 : 0)&quot; class&#x3D;&quot;empty-state&quot; role&#x3D;&quot;cell&quot;&gt;
+            No se encontraron registros que coincidan con la búsqueda.
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Controles de paginación accesibles --&gt;
+  &lt;footer class&#x3D;&quot;table-pagination&quot; *ngIf&#x3D;&quot;totalPages() &gt; 1&quot;&gt;
+    &lt;button 
+      type&#x3D;&quot;button&quot;
+      class&#x3D;&quot;page-btn&quot; 
+      [disabled]&#x3D;&quot;currentPage() &#x3D;&#x3D;&#x3D; 1&quot;
+      (click)&#x3D;&quot;setPage(currentPage() - 1)&quot;
+      aria-label&#x3D;&quot;Página anterior&quot;
+    &gt;
+      « Anterior
+    &lt;/button&gt;
+    
+    &lt;span class&#x3D;&quot;page-indicator&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      Página {{ currentPage() }} de {{ totalPages() }}
+    &lt;/span&gt;
+
+    &lt;button 
+      type&#x3D;&quot;button&quot;
+      class&#x3D;&quot;page-btn&quot; 
+      [disabled]&#x3D;&quot;currentPage() &#x3D;&#x3D;&#x3D; totalPages()&quot;
+      (click)&#x3D;&quot;setPage(currentPage() + 1)&quot;
+      aria-label&#x3D;&quot;Página siguiente&quot;
+    &gt;
+      Siguiente »
+    &lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./data-table.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.data-table-container {
+  background: var(--ion-background-color, #ffffff);
+  border: 1px solid var(--ion-color-step-150, #e2e8f0);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.table-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background-color: var(--ion-color-step-50, #f8fafc);
+  border-bottom: 1px solid var(--ion-color-step-150, #e2e8f0);
+  gap: 0.75rem;
+
+  .header-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .table-title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ion-text-color, #0f172a);
+    }
+
+    .count-badge {
+      font-size: 0.8rem;
+      color: var(--ion-color-step-600, #475569);
+      background: var(--ion-color-step-100, #e2e8f0);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 240px;
+    max-width: 360px;
+
+    .search-input {
+      width: 100%;
+      padding: 0.55rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--ion-color-step-200, #cbd5e1);
+      background-color: var(--ion-card-background, #ffffff);
+      color: var(--ion-text-color, #0f172a);
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &amp;:focus {
+        outline: none;
+        border-color: var(--ion-color-primary, #3880ff);
+        box-shadow: 0 0 0 3px rgba(56, 128, 255, 0.2);
+      }
+    }
+  }
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &amp;:focus {
+    outline: 2px solid var(--ion-color-primary, #3880ff);
+    outline-offset: -2px;
+  }
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+
+  thead tr {
+    background-color: var(--ion-color-step-100, #f1f5f9);
+    border-bottom: 2px solid var(--ion-color-step-200, #cbd5e1);
+
+    th {
+      padding: 0.85rem 1rem;
+      font-weight: 600;
+      color: var(--ion-color-step-700, #334155);
+      white-space: nowrap;
+
+      &amp;.sortable {
+        cursor: pointer;
+        user-select: none;
+
+        &amp;:hover, &amp;:focus {
+          background-color: var(--ion-color-step-150, #e2e8f0);
+          outline: none;
+        }
+      }
+
+      .th-content {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+
+        .sort-icon {
+          font-size: 0.75rem;
+          color: var(--ion-color-primary, #3880ff);
+        }
+      }
+    }
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--ion-color-step-100, #f1f5f9);
+    transition: background-color 0.15s ease-in-out;
+    cursor: pointer;
+
+    &amp;:hover, &amp;:focus {
+      background-color: rgba(56, 128, 255, 0.05);
+      outline: none;
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      color: var(--ion-text-color, #1e293b);
+      vertical-align: middle;
+
+      .price-cell {
+        font-weight: 600;
+        color: var(--ion-color-success-shade, #15803d);
+      }
+
+      .status-badge {
+        font-size: 0.78rem;
+        padding: 0.25rem 0.5rem;
+        font-weight: 600;
+        border-radius: 4px;
+      }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--ion-color-step-500, #64748b);
+      font-style: italic;
+    }
+  }
+}
+
+.actions-cell {
+  white-space: nowrap;
+  text-align: right;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+
+  .btn-action {
+    border: none;
+    border-radius: 6px;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, background-color 0.2s;
+
+    &amp;.edit {
+      background-color: rgba(56, 128, 255, 0.15);
+      color: var(--ion-color-primary, #3880ff);
+
+      &amp;:hover {
+        background-color: var(--ion-color-primary, #3880ff);
+        color: #ffffff;
+      }
+    }
+
+    &amp;.delete {
+      background-color: rgba(235, 68, 90, 0.15);
+      color: var(--ion-color-danger, #eb445a);
+
+      &amp;:hover {
+        background-color: var(--ion-color-danger, #eb445a);
+        color: #ffffff;
+      }
+    }
+
+    &amp;:focus-visible {
+      outline: 2px solid var(--ion-color-dark, #1e293b);
+    }
+  }
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--ion-color-step-50, #f8fafc);
+  border-top: 1px solid var(--ion-color-step-150, #e2e8f0);
+
+  .page-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid var(--ion-color-step-200, #cbd5e1);
+    background-color: var(--ion-card-background, #ffffff);
+    color: var(--ion-text-color, #1e293b);
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &amp;:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    &amp;:not(:disabled):hover {
+      background-color: var(--ion-color-step-100, #f1f5f9);
+    }
+
+    &amp;:focus-visible {
+      outline: 2px solid var(--ion-color-primary, #3880ff);
+    }
+  }
+
+  .page-indicator {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ion-color-step-600, #475569);
+  }
+}
+
+/* Utilidad accesible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="data-table-container" role="region" [attr.aria-label]="title">  <!-- Cabecera de la tabla con buscador y resumen -->  <header class="table-header">    <div class="header-info">      <h3 class="table-title">{{ title }}</h3>      <span class="count-badge" aria-live="polite">        Mostrando {{ filteredData().length }} resultado(s)      </span>    </div>    <div class="search-box">      <label for="table-search-input" class="sr-only">Buscar en la tabla</label>      <input         id="table-search-input"        type="search"         [value]="searchTerm()"         (input)="onSearchChange($event)"         [placeholder]="filterPlaceholder"        class="search-input"        aria-label="Buscar en la tabla de datos"      />    </div>  </header>  <!-- Tabla accesible y responsiva -->  <div class="table-responsive-wrapper" tabindex="0" role="region" aria-label="Contenedor de datos tabulados">    <table class="custom-table" role="table">      <thead>        <tr role="row">          <th             *ngFor="let col of columns"             role="columnheader"             [attr.aria-sort]="sortKey() === col.key ? (sortAsc() ? \'ascending\' : \'descending\') : \'none\'"            (click)="col.sortable !== false ? sortBy(col.key) : null"            (keydown.enter)="col.sortable !== false ? sortBy(col.key) : null"            [class.sortable]="col.sortable !== false"            [attr.tabindex]="col.sortable !== false ? 0 : -1"            scope="col"          >            <div class="th-content">              <span>{{ col.header }}</span>              <span *ngIf="col.sortable !== false" class="sort-icon" aria-hidden="true">                {{ sortKey() === col.key ? (sortAsc() ? \'▲\' : \'▼\') : \'⇅\' }}              </span>            </div>          </th>          <th *ngIf="canEdit || canDelete" role="columnheader" scope="col" class="actions-header">            Acciones          </th>        </tr>      </thead>      <tbody>        <tr           *ngFor="let row of paginatedData()"           role="row"           tabindex="0"          (click)="onSelect(row)"          (keydown.enter)="onSelect(row)"          class="table-row"        >          <td *ngFor="let col of columns" role="cell">            <!-- Renderizado según tipo de dato -->            <ng-container [ngSwitch]="col.type">              <span *ngSwitchCase="\'currency\'" class="price-cell">                €{{ row[col.key] | number:\'1.2-2\' }}              </span>              <span *ngSwitchCase="\'status\'">                <ion-badge [color]="getStatusColor(row[col.key])" class="status-badge">                  {{ row[col.key] }}                </ion-badge>              </span>              <span *ngSwitchCase="\'date\'" class="date-cell">                {{ row[col.key] | date:\'shortDate\' }}              </span>              <span *ngSwitchDefault>                {{ row[col.key] }}              </span>            </ng-container>          </td>          <!-- Celda de acciones de fila -->          <td *ngIf="canEdit || canDelete" role="cell" class="actions-cell">            <button               *ngIf="canEdit"              type="button"              class="btn-action edit"              (click)="emitAction(\'edit\', row, $event)"              [attr.aria-label]="\'Editar registro \' + (row.codigo || row.nombre)"            >              Editar            </button>            <button               *ngIf="canDelete"              type="button"              class="btn-action delete"              (click)="emitAction(\'delete\', row, $event)"              [attr.aria-label]="\'Eliminar registro \' + (row.codigo || row.nombre)"            >              Eliminar            </button>          </td>        </tr>        <!-- Estado vacío -->        <tr *ngIf="paginatedData().length === 0" role="row">          <td [attr.colspan]="columns.length + (canEdit || canDelete ? 1 : 0)" class="empty-state" role="cell">            No se encontraron registros que coincidan con la búsqueda.          </td>        </tr>      </tbody>    </table>  </div>  <!-- Controles de paginación accesibles -->  <footer class="table-pagination" *ngIf="totalPages() > 1">    <button       type="button"      class="page-btn"       [disabled]="currentPage() === 1"      (click)="setPage(currentPage() - 1)"      aria-label="Página anterior"    >      « Anterior    </button>        <span class="page-indicator" aria-live="polite">      Página {{ currentPage() }} de {{ totalPages() }}    </span>    <button       type="button"      class="page-btn"       [disabled]="currentPage() === totalPages()"      (click)="setPage(currentPage() + 1)"      aria-label="Página siguiente"    >      Siguiente »    </button>  </footer></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartWidgetComponent', 'selector': 'app-chart-widget'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'ExploreContainerComponent', 'selector': 'app-explore-container'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'InventoryPage', 'selector': 'app-inventory'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MetricCardComponent', 'selector': 'app-metric-card'},{'name': 'RealtimePage', 'selector': 'app-realtime'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'Tab1Page', 'selector': 'app-tab1'},{'name': 'Tab2Page', 'selector': 'app-tab2'},{'name': 'Tab3Page', 'selector': 'app-tab3'},{'name': 'TabsPage', 'selector': 'app-tabs'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DataTableComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DataTableComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

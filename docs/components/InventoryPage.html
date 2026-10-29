@@ -1,0 +1,2050 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-app-gestion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">mi-app-gestion documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  InventoryPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/inventory/inventory.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-inventory</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonSpinner</code>
+</div>
+                        <div>    <code>IonModal</code>
+</div>
+                        <div>        <code><a href="../components/DataTableComponent.html" target="_self" >DataTableComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./inventory.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./inventory.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonSpinner</code>
+                                </li>
+                                <li>
+                                        <code>IonModal</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/DataTableComponent.html" target="_self" >DataTableComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#editingRecordId" >editingRecordId</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#firebaseService" >firebaseService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isModalOpen" >isModalOpen</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isSaving" >isSaving</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#recordForm" >recordForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#records" >records</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#tableColumns" >tableColumns</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#closeModal" >closeModal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#handleRowSelect" >handleRowSelect</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#handleTableAction" >handleTableAction</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#initForm" >initForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadRecords" >loadRecords</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onSaveRecord" >onSaveRecord</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#openCreateModal" >openCreateModal</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#openEditModal" >openEditModal</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModal"></a>
+                    <span class="name">
+                        <span ><b>closeModal</b></span>
+                        <a href="#closeModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleRowSelect"></a>
+                    <span class="name">
+                        <span ><b>handleRowSelect</b></span>
+                        <a href="#handleRowSelect"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleRowSelect(item: <a href="../interfaces/BusinessRecord.html" target="_self">BusinessRecord</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:221</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/BusinessRecord.html" target="_self" >BusinessRecord</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleTableAction"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>handleTableAction</b></span>
+                        <a href="#handleTableAction"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleTableAction(event: <a href="../interfaces/BusinessRecord.html" target="_self">{ action: &quot;edit&quot; | &quot;delete&quot; | &quot;view&quot;; item: BusinessRecord }</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/BusinessRecord.html" target="_self" >{ action: &quot;edit&quot; | &quot;delete&quot; | &quot;view&quot;; item: BusinessRecord }</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initForm</b></span>
+                        <a href="#initForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadRecords"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadRecords</b></span>
+                        <a href="#loadRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadRecords()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSaveRecord"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onSaveRecord</b></span>
+                        <a href="#onSaveRecord"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSaveRecord()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCreateModal"></a>
+                    <span class="name">
+                        <span ><b>openCreateModal</b></span>
+                        <a href="#openCreateModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCreateModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openEditModal"></a>
+                    <span class="name">
+                        <span ><b>openEditModal</b></span>
+                        <a href="#openEditModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openEditModal(record: <a href="../interfaces/BusinessRecord.html" target="_self">BusinessRecord</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/pages/inventory/inventory.page.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>record</td>
+                                            <td>
+                                                            <code><a href="../interfaces/BusinessRecord.html" target="_self" >BusinessRecord</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editingRecordId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>editingRecordId</b></span>
+                        <a href="#editingRecordId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firebaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>firebaseService</b></span>
+                        <a href="#firebaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FirebaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isModalOpen"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isModalOpen</b></span>
+                        <a href="#isModalOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSaving"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isSaving</b></span>
+                        <a href="#isSaving"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recordForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>recordForm</b></span>
+                        <a href="#recordForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="records"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>records</b></span>
+                        <a href="#records"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;BusinessRecord[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tableColumns"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>tableColumns</b></span>
+                        <a href="#tableColumns"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/TableColumn.html" target="_self" >TableColumn[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    { key: &#x27;codigo&#x27;, header: &#x27;Código&#x27;, sortable: true, type: &#x27;text&#x27; },
+    { key: &#x27;nombre&#x27;, header: &#x27;Nombre del Activo&#x27;, sortable: true, type: &#x27;text&#x27; },
+    { key: &#x27;categoria&#x27;, header: &#x27;Categoría&#x27;, sortable: true, type: &#x27;text&#x27; },
+    { key: &#x27;precio&#x27;, header: &#x27;Precio Unitario&#x27;, sortable: true, type: &#x27;currency&#x27; },
+    { key: &#x27;stock&#x27;, header: &#x27;Stock&#x27;, sortable: true, type: &#x27;number&#x27; },
+    { key: &#x27;estado&#x27;, header: &#x27;Estado&#x27;, sortable: true, type: &#x27;status&#x27; }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/pages/inventory/inventory.page.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { 
+  FormBuilder, 
+  FormGroup, 
+  Validators, 
+  ReactiveFormsModule, 
+  AbstractControl, 
+  AsyncValidatorFn 
+} from &#x27;@angular/forms&#x27;;
+import { 
+  IonContent, 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonButtons, 
+  IonButton, 
+  IonSpinner, 
+  IonModal 
+} from &#x27;@ionic/angular&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { map, catchError } from &#x27;rxjs/operators&#x27;;
+import { SupabaseService } from &#x27;../../services/supabase.service&#x27;;
+import { FirebaseService } from &#x27;../../services/firebase.service&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { BusinessRecord, TableColumn, RecordStatus } from &#x27;../../models/record.model&#x27;;
+import { DataTableComponent } from &#x27;../../components/data-table/data-table.component&#x27;;
+
+/**
+ * Validador Asíncrono para verificar unicidad del código de producto contra Supabase
+ * Cumplimiento RA 2: Validaciones asíncronas contra servicio (ej. verificar si código ya existe)
+ */
+export function uniqueCodeValidator(supabaseService: SupabaseService): AsyncValidatorFn {
+  return (control: AbstractControl): Observable&lt;{ codeTaken: boolean } | null&gt; &#x3D;&gt; {
+    if (!control.value || control.value.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return of(null);
+    }
+    return supabaseService.checkCodeExists(control.value).pipe(
+      map(exists &#x3D;&gt; (exists ? { codeTaken: true } : null)),
+      catchError(() &#x3D;&gt; of(null))
+    );
+  };
+}
+
+@Component({
+  selector: &#x27;app-inventory&#x27;,
+  templateUrl: &#x27;./inventory.page.html&#x27;,
+  styleUrls: [&#x27;./inventory.page.scss&#x27;],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonSpinner,
+    IonModal,
+    DataTableComponent
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class InventoryPage implements OnInit {
+  private supabaseService &#x3D; inject(SupabaseService);
+  private firebaseService &#x3D; inject(FirebaseService);
+  public authService &#x3D; inject(AuthService);
+  private fb &#x3D; inject(FormBuilder);
+
+  public isLoading &#x3D; signal&lt;boolean&gt;(true);
+  public records &#x3D; signal&lt;BusinessRecord[]&gt;([]);
+  public isModalOpen &#x3D; signal&lt;boolean&gt;(false);
+  public isSaving &#x3D; signal&lt;boolean&gt;(false);
+  public editingRecordId &#x3D; signal&lt;string | null&gt;(null);
+
+  // Formulario reactivo con validador asíncrono
+  public recordForm!: FormGroup;
+
+  // Definición declarativa de columnas para el componente reutilizable
+  public tableColumns: TableColumn[] &#x3D; [
+    { key: &#x27;codigo&#x27;, header: &#x27;Código&#x27;, sortable: true, type: &#x27;text&#x27; },
+    { key: &#x27;nombre&#x27;, header: &#x27;Nombre del Activo&#x27;, sortable: true, type: &#x27;text&#x27; },
+    { key: &#x27;categoria&#x27;, header: &#x27;Categoría&#x27;, sortable: true, type: &#x27;text&#x27; },
+    { key: &#x27;precio&#x27;, header: &#x27;Precio Unitario&#x27;, sortable: true, type: &#x27;currency&#x27; },
+    { key: &#x27;stock&#x27;, header: &#x27;Stock&#x27;, sortable: true, type: &#x27;number&#x27; },
+    { key: &#x27;estado&#x27;, header: &#x27;Estado&#x27;, sortable: true, type: &#x27;status&#x27; }
+  ];
+
+  ngOnInit(): void {
+    this.initForm();
+    this.loadRecords();
+  }
+
+  private initForm(): void {
+    this.recordForm &#x3D; this.fb.group({
+      codigo: [&#x27;&#x27;, {
+        validators: [Validators.required, Validators.pattern(/^[A-Z0-9-]+$/)],
+        asyncValidators: [uniqueCodeValidator(this.supabaseService)],
+        updateOn: &#x27;blur&#x27;
+      }],
+      nombre: [&#x27;&#x27;, [Validators.required, Validators.minLength(4)]],
+      categoria: [&#x27;Hardware&#x27;, Validators.required],
+      precio: [100, [Validators.required, Validators.min(0.01)]],
+      stock: [10, [Validators.required, Validators.min(0)]],
+      estado: [&#x27;Activo&#x27; as RecordStatus, Validators.required],
+      descripcion: [&#x27;&#x27;]
+    });
+  }
+
+  async loadRecords(): Promise&lt;void&gt; {
+    this.isLoading.set(true);
+    try {
+      const data &#x3D; await this.supabaseService.getRecords();
+      this.records.set(data);
+    } catch (e) {
+      console.error(&#x27;Error al cargar inventario:&#x27;, e);
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
+
+  openCreateModal(): void {
+    this.editingRecordId.set(null);
+    this.recordForm.reset({
+      codigo: &#x27;PRD-&#x27; + Math.floor(1000 + Math.random() * 9000),
+      nombre: &#x27;&#x27;,
+      categoria: &#x27;Hardware&#x27;,
+      precio: 150.00,
+      stock: 10,
+      estado: &#x27;Activo&#x27;,
+      descripcion: &#x27;&#x27;
+    });
+    this.recordForm.get(&#x27;codigo&#x27;)?.enable();
+    this.isModalOpen.set(true);
+  }
+
+  openEditModal(record: BusinessRecord): void {
+    this.editingRecordId.set(record.id);
+    this.recordForm.setValue({
+      codigo: record.codigo,
+      nombre: record.nombre,
+      categoria: record.categoria,
+      precio: record.precio,
+      stock: record.stock,
+      estado: record.estado,
+      descripcion: record.descripcion || &#x27;&#x27;
+    });
+    // Al editar no permitimos modificar el código primario
+    this.recordForm.get(&#x27;codigo&#x27;)?.disable();
+    this.isModalOpen.set(true);
+  }
+
+  closeModal(): void {
+    this.isModalOpen.set(false);
+    this.editingRecordId.set(null);
+  }
+
+  async onSaveRecord(): Promise&lt;void&gt; {
+    if (this.recordForm.invalid) {
+      this.recordForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSaving.set(true);
+    const formVal &#x3D; this.recordForm.getRawValue();
+    const user &#x3D; this.authService.getSnapshot().user;
+
+    try {
+      const editId &#x3D; this.editingRecordId();
+      if (editId) {
+        // Actualización
+        await this.supabaseService.updateRecord(editId, formVal);
+        await this.firebaseService.logAction({
+          accion: &#x27;EDITAR_REGISTRO&#x27;,
+          entidad: &#x27;Inventario SQL&#x27;,
+          usuario: user?.email || &#x27;anónimo&#x27;,
+          rol: user?.rol || &#x27;Standard&#x27;,
+          detalles: &#x60;Modificación de ${formVal.codigo} - ${formVal.nombre}&#x60;
+        });
+      } else {
+        // Creación
+        await this.supabaseService.createRecord(formVal);
+        await this.firebaseService.logAction({
+          accion: &#x27;CREAR_REGISTRO&#x27;,
+          entidad: &#x27;Inventario SQL&#x27;,
+          usuario: user?.email || &#x27;anónimo&#x27;,
+          rol: user?.rol || &#x27;Standard&#x27;,
+          detalles: &#x60;Alta de nuevo ítem ${formVal.codigo} - ${formVal.nombre}&#x60;
+        });
+      }
+
+      await this.loadRecords();
+      this.closeModal();
+    } catch (err) {
+      console.error(&#x27;Error al guardar:&#x27;, err);
+    } finally {
+      this.isSaving.set(false);
+    }
+  }
+
+  async handleTableAction(event: { action: &#x27;edit&#x27; | &#x27;delete&#x27; | &#x27;view&#x27;; item: BusinessRecord }): Promise&lt;void&gt; {
+    if (event.action &#x3D;&#x3D;&#x3D; &#x27;edit&#x27;) {
+      this.openEditModal(event.item);
+    } else if (event.action &#x3D;&#x3D;&#x3D; &#x27;delete&#x27;) {
+      if (confirm(&#x60;¿Confirma que desea eliminar el registro ${event.item.codigo} (${event.item.nombre})?&#x60;)) {
+        await this.supabaseService.deleteRecord(event.item.id);
+        const user &#x3D; this.authService.getSnapshot().user;
+        await this.firebaseService.logAction({
+          accion: &#x27;ELIMINAR_REGISTRO&#x27;,
+          entidad: &#x27;Inventario SQL&#x27;,
+          usuario: user?.email || &#x27;anónimo&#x27;,
+          rol: user?.rol || &#x27;Standard&#x27;,
+          detalles: &#x60;Eliminado registro ${event.item.codigo}&#x60;
+        });
+        await this.loadRecords();
+      }
+    }
+  }
+
+  handleRowSelect(item: BusinessRecord): void {
+    // Si es admin o standard, abrimos edición o detalle
+    this.openEditModal(item);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-title&gt;Gestión de Inventario (Supabase SQL)&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;openCreateModal()&quot; color&#x3D;&quot;light&quot; fill&#x3D;&quot;solid&quot; class&#x3D;&quot;btn-create-top&quot; aria-label&#x3D;&quot;Crear nuevo registro en Supabase&quot;&gt;
+        + Nuevo Registro
+      &lt;/ion-button&gt;
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;inventory-content&quot;&gt;
+  &lt;main class&#x3D;&quot;inventory-main&quot; role&#x3D;&quot;main&quot;&gt;
+    &lt;!-- Encabezado de la vista --&gt;
+    &lt;header class&#x3D;&quot;inventory-header&quot;&gt;
+      &lt;div class&#x3D;&quot;header-texts&quot;&gt;
+        &lt;h2 class&#x3D;&quot;view-title&quot;&gt;Catálogo de Activos y Existencias&lt;/h2&gt;
+        &lt;p class&#x3D;&quot;view-desc&quot;&gt;
+          Capa de datos consumida asíncronamente desde &lt;strong&gt;Supabase REST API&lt;/strong&gt;. Integra validación asíncrona de códigos y control de concurrencia.
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;header-actions&quot;&gt;
+        &lt;button 
+          type&#x3D;&quot;button&quot; 
+          class&#x3D;&quot;btn-new-record&quot;
+          (click)&#x3D;&quot;openCreateModal()&quot;
+          aria-label&#x3D;&quot;Dar de alta un nuevo registro empresarial&quot;
+        &gt;
+          &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;+&lt;/span&gt; Nuevo Registro Empresarial
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Indicador de Carga --&gt;
+    &lt;div *ngIf&#x3D;&quot;isLoading()&quot; class&#x3D;&quot;loading-state&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-spinner&gt;
+      &lt;p&gt;Cargando registros desde la API relacional SQL...&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- TABLA REUTILIZABLE (Componente Reutilizable 1 - RA 3) --&gt;
+    &lt;section *ngIf&#x3D;&quot;!isLoading()&quot; aria-label&#x3D;&quot;Listado interactivo de inventario&quot;&gt;
+      &lt;app-data-table
+        [data]&#x3D;&quot;records()&quot;
+        [columns]&#x3D;&quot;tableColumns&quot;
+        title&#x3D;&quot;Existencias en Base de Datos SQL&quot;
+        filterPlaceholder&#x3D;&quot;Buscar por código, nombre o categoría...&quot;
+        [pageSize]&#x3D;&quot;7&quot;
+        [canEdit]&#x3D;&quot;true&quot;
+        [canDelete]&#x3D;&quot;authService.isAdmin()&quot;
+        (rowSelect)&#x3D;&quot;handleRowSelect($event)&quot;
+        (rowAction)&#x3D;&quot;handleTableAction($event)&quot;
+      &gt;&lt;/app-data-table&gt;
+    &lt;/section&gt;
+
+    &lt;!-- MODAL DE ALTA / EDICIÓN CON VALIDACIONES ASÍNCRONAS (RA 2) --&gt;
+    &lt;ion-modal [isOpen]&#x3D;&quot;isModalOpen()&quot; (didDismiss)&#x3D;&quot;closeModal()&quot;&gt;
+      &lt;ng-template&gt;
+        &lt;div class&#x3D;&quot;modal-wrapper&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;modal-title&quot; aria-modal&#x3D;&quot;true&quot;&gt;
+          &lt;header class&#x3D;&quot;modal-header&quot;&gt;
+            &lt;h3 id&#x3D;&quot;modal-title&quot; class&#x3D;&quot;modal-title&quot;&gt;
+              {{ editingRecordId() ? &#x27;Modificar Registro&#x27; : &#x27;Alta de Nuevo Registro SQL&#x27; }}
+            &lt;/h3&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close-modal&quot; (click)&#x3D;&quot;closeModal()&quot; aria-label&#x3D;&quot;Cerrar ventana&quot;&gt;
+              ✕
+            &lt;/button&gt;
+          &lt;/header&gt;
+
+          &lt;form [formGroup]&#x3D;&quot;recordForm&quot; (ngSubmit)&#x3D;&quot;onSaveRecord()&quot; novalidate class&#x3D;&quot;modal-body&quot;&gt;
+            &lt;!-- Campo Código con validación asíncrona --&gt;
+            &lt;div class&#x3D;&quot;form-group&quot;&gt;
+              &lt;div class&#x3D;&quot;label-row&quot;&gt;
+                &lt;label for&#x3D;&quot;inv-codigo&quot; class&#x3D;&quot;form-label&quot;&gt;Código Único (SKU)&lt;/label&gt;
+                &lt;span 
+                  *ngIf&#x3D;&quot;recordForm.get(&#x27;codigo&#x27;)?.pending&quot; 
+                  class&#x3D;&quot;async-verifying&quot;
+                  aria-live&#x3D;&quot;polite&quot;
+                &gt;
+                  ⏳ Comprobando disponibilidad en Supabase...
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;input 
+                id&#x3D;&quot;inv-codigo&quot;
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;codigo&quot;
+                class&#x3D;&quot;form-control&quot;
+                placeholder&#x3D;&quot;EJ: PRD-5001&quot;
+                [class.is-invalid]&#x3D;&quot;recordForm.get(&#x27;codigo&#x27;)?.touched &amp;&amp; recordForm.get(&#x27;codigo&#x27;)?.invalid&quot;
+                aria-required&#x3D;&quot;true&quot;
+                aria-describedby&#x3D;&quot;code-error&quot;
+              /&gt;
+              &lt;div 
+                *ngIf&#x3D;&quot;recordForm.get(&#x27;codigo&#x27;)?.touched &amp;&amp; recordForm.get(&#x27;codigo&#x27;)?.invalid&quot; 
+                id&#x3D;&quot;code-error&quot; 
+                class&#x3D;&quot;field-error&quot;
+                role&#x3D;&quot;alert&quot;
+              &gt;
+                &lt;span *ngIf&#x3D;&quot;recordForm.get(&#x27;codigo&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;El código es obligatorio.&lt;/span&gt;
+                &lt;span *ngIf&#x3D;&quot;recordForm.get(&#x27;codigo&#x27;)?.errors?.[&#x27;pattern&#x27;]&quot;&gt;Sólo mayúsculas, números y guiones.&lt;/span&gt;
+                &lt;span *ngIf&#x3D;&quot;recordForm.get(&#x27;codigo&#x27;)?.errors?.[&#x27;codeTaken&#x27;]&quot; class&#x3D;&quot;error-highlight&quot;&gt;
+                  ⛔ Este código ya existe en la base de datos (Validación asíncrona RA 2).
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Campo Nombre --&gt;
+            &lt;div class&#x3D;&quot;form-group&quot;&gt;
+              &lt;label for&#x3D;&quot;inv-nombre&quot; class&#x3D;&quot;form-label&quot;&gt;Nombre del Activo&lt;/label&gt;
+              &lt;input 
+                id&#x3D;&quot;inv-nombre&quot;
+                type&#x3D;&quot;text&quot;
+                formControlName&#x3D;&quot;nombre&quot;
+                class&#x3D;&quot;form-control&quot;
+                placeholder&#x3D;&quot;Nombre descriptivo completo&quot;
+                [class.is-invalid]&#x3D;&quot;recordForm.get(&#x27;nombre&#x27;)?.touched &amp;&amp; recordForm.get(&#x27;nombre&#x27;)?.invalid&quot;
+                aria-required&#x3D;&quot;true&quot;
+              /&gt;
+              &lt;div *ngIf&#x3D;&quot;recordForm.get(&#x27;nombre&#x27;)?.touched &amp;&amp; recordForm.get(&#x27;nombre&#x27;)?.invalid&quot; class&#x3D;&quot;field-error&quot;&gt;
+                Mínimo 4 caracteres requeridos.
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Fila Categoría y Estado --&gt;
+            &lt;div class&#x3D;&quot;form-row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group flex-1&quot;&gt;
+                &lt;label for&#x3D;&quot;inv-categoria&quot; class&#x3D;&quot;form-label&quot;&gt;Categoría&lt;/label&gt;
+                &lt;select id&#x3D;&quot;inv-categoria&quot; formControlName&#x3D;&quot;categoria&quot; class&#x3D;&quot;form-control&quot;&gt;
+                  &lt;option value&#x3D;&quot;Hardware&quot;&gt;Hardware&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Software&quot;&gt;Software&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Redes&quot;&gt;Redes&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Servicios&quot;&gt;Servicios&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Periféricos&quot;&gt;Periféricos&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;form-group flex-1&quot;&gt;
+                &lt;label for&#x3D;&quot;inv-estado&quot; class&#x3D;&quot;form-label&quot;&gt;Estado&lt;/label&gt;
+                &lt;select id&#x3D;&quot;inv-estado&quot; formControlName&#x3D;&quot;estado&quot; class&#x3D;&quot;form-control&quot;&gt;
+                  &lt;option value&#x3D;&quot;Activo&quot;&gt;Activo&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Bajo Stock&quot;&gt;Bajo Stock&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;Agotado&quot;&gt;Agotado&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;En Revisión&quot;&gt;En Revisión&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Fila Precio y Stock --&gt;
+            &lt;div class&#x3D;&quot;form-row&quot;&gt;
+              &lt;div class&#x3D;&quot;form-group flex-1&quot;&gt;
+                &lt;label for&#x3D;&quot;inv-precio&quot; class&#x3D;&quot;form-label&quot;&gt;Precio Unitario (€)&lt;/label&gt;
+                &lt;input 
+                  id&#x3D;&quot;inv-precio&quot;
+                  type&#x3D;&quot;number&quot;
+                  step&#x3D;&quot;0.01&quot;
+                  formControlName&#x3D;&quot;precio&quot;
+                  class&#x3D;&quot;form-control&quot;
+                  [class.is-invalid]&#x3D;&quot;recordForm.get(&#x27;precio&#x27;)?.touched &amp;&amp; recordForm.get(&#x27;precio&#x27;)?.invalid&quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;div class&#x3D;&quot;form-group flex-1&quot;&gt;
+                &lt;label for&#x3D;&quot;inv-stock&quot; class&#x3D;&quot;form-label&quot;&gt;Unidades en Stock&lt;/label&gt;
+                &lt;input 
+                  id&#x3D;&quot;inv-stock&quot;
+                  type&#x3D;&quot;number&quot;
+                  formControlName&#x3D;&quot;stock&quot;
+                  class&#x3D;&quot;form-control&quot;
+                  [class.is-invalid]&#x3D;&quot;recordForm.get(&#x27;stock&#x27;)?.touched &amp;&amp; recordForm.get(&#x27;stock&#x27;)?.invalid&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Descripción --&gt;
+            &lt;div class&#x3D;&quot;form-group&quot;&gt;
+              &lt;label for&#x3D;&quot;inv-desc&quot; class&#x3D;&quot;form-label&quot;&gt;Descripción Técnica (Opcional)&lt;/label&gt;
+              &lt;textarea 
+                id&#x3D;&quot;inv-desc&quot;
+                rows&#x3D;&quot;2&quot;
+                formControlName&#x3D;&quot;descripcion&quot;
+                class&#x3D;&quot;form-control&quot;
+                placeholder&#x3D;&quot;Detalles sobre especificaciones o ubicación...&quot;
+              &gt;&lt;/textarea&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Botones de Acción --&gt;
+            &lt;footer class&#x3D;&quot;modal-footer&quot;&gt;
+              &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-cancel&quot; (click)&#x3D;&quot;closeModal()&quot;&gt;
+                Cancelar
+              &lt;/button&gt;
+              &lt;button 
+                type&#x3D;&quot;submit&quot; 
+                class&#x3D;&quot;btn-save&quot; 
+                [disabled]&#x3D;&quot;recordForm.invalid || isSaving() || recordForm.pending&quot;
+              &gt;
+                &lt;ion-spinner *ngIf&#x3D;&quot;isSaving()&quot; name&#x3D;&quot;crescent&quot; class&#x3D;&quot;btn-spinner&quot;&gt;&lt;/ion-spinner&gt;
+                &lt;span *ngIf&#x3D;&quot;!isSaving()&quot;&gt;
+                  {{ editingRecordId() ? &#x27;Guardar Cambios&#x27; : &#x27;Registrar en Supabase&#x27; }}
+                &lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/footer&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/ng-template&gt;
+    &lt;/ion-modal&gt;
+  &lt;/main&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./inventory.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.inventory-content {
+  --background: #f8fafc;
+}
+
+.inventory-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .view-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .view-desc {
+    font-size: 0.9rem;
+    color: #475569;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .btn-new-record {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 0.65rem 1.15rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    transition: background-color 0.2s;
+
+    &amp;:hover {
+      background-color: #1d4ed8;
+    }
+
+    &amp;:focus-visible {
+      outline: 2px solid #0f172a;
+    }
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  color: #64748b;
+
+  ion-spinner {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Modal styling */
+.modal-wrapper {
+  background: #ffffff;
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.25rem;
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      color: #64748b;
+      cursor: pointer;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+
+      &amp;:hover {
+        background-color: #f1f5f9;
+        color: #0f172a;
+      }
+    }
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      &amp;.flex-1 {
+        flex: 1;
+      }
+
+      .label-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .form-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .async-verifying {
+        font-size: 0.75rem;
+        color: #d97706;
+        font-weight: 500;
+      }
+
+      .form-control {
+        padding: 0.55rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+        font-size: 0.9rem;
+        color: #0f172a;
+        background: #ffffff;
+        transition: border-color 0.2s;
+
+        &amp;:focus {
+          outline: none;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        &amp;.is-invalid {
+          border-color: #dc2626;
+        }
+      }
+
+      .field-error {
+        font-size: 0.78rem;
+        color: #dc2626;
+        font-weight: 500;
+
+        .error-highlight {
+          font-weight: 700;
+        }
+      }
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e2e8f0;
+
+      .btn-cancel {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+
+        &amp;:hover {
+          background: #e2e8f0;
+        }
+      }
+
+      .btn-save {
+        background: #2563eb;
+        color: #ffffff;
+        border: none;
+        padding: 0.6rem 1.25rem;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &amp;:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        &amp;:hover:not(:disabled) {
+          background: #1d4ed8;
+        }
+
+        .btn-spinner {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-title>Gestión de Inventario (Supabase SQL)</ion-title>    <ion-buttons slot="end">      <ion-button (click)="openCreateModal()" color="light" fill="solid" class="btn-create-top" aria-label="Crear nuevo registro en Supabase">        + Nuevo Registro      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="inventory-content">  <main class="inventory-main" role="main">    <!-- Encabezado de la vista -->    <header class="inventory-header">      <div class="header-texts">        <h2 class="view-title">Catálogo de Activos y Existencias</h2>        <p class="view-desc">          Capa de datos consumida asíncronamente desde <strong>Supabase REST API</strong>. Integra validación asíncrona de códigos y control de concurrencia.        </p>      </div>      <div class="header-actions">        <button           type="button"           class="btn-new-record"          (click)="openCreateModal()"          aria-label="Dar de alta un nuevo registro empresarial"        >          <span aria-hidden="true">+</span> Nuevo Registro Empresarial        </button>      </div>    </header>    <!-- Indicador de Carga -->    <div *ngIf="isLoading()" class="loading-state" role="status" aria-live="polite">      <ion-spinner name="crescent" color="primary"></ion-spinner>      <p>Cargando registros desde la API relacional SQL...</p>    </div>    <!-- TABLA REUTILIZABLE (Componente Reutilizable 1 - RA 3) -->    <section *ngIf="!isLoading()" aria-label="Listado interactivo de inventario">      <app-data-table        [data]="records()"        [columns]="tableColumns"        title="Existencias en Base de Datos SQL"        filterPlaceholder="Buscar por código, nombre o categoría..."        [pageSize]="7"        [canEdit]="true"        [canDelete]="authService.isAdmin()"        (rowSelect)="handleRowSelect($event)"        (rowAction)="handleTableAction($event)"      ></app-data-table>    </section>    <!-- MODAL DE ALTA / EDICIÓN CON VALIDACIONES ASÍNCRONAS (RA 2) -->    <ion-modal [isOpen]="isModalOpen()" (didDismiss)="closeModal()">      <ng-template>        <div class="modal-wrapper" role="dialog" aria-labelledby="modal-title" aria-modal="true">          <header class="modal-header">            <h3 id="modal-title" class="modal-title">              {{ editingRecordId() ? \'Modificar Registro\' : \'Alta de Nuevo Registro SQL\' }}            </h3>            <button type="button" class="btn-close-modal" (click)="closeModal()" aria-label="Cerrar ventana">              ✕            </button>          </header>          <form [formGroup]="recordForm" (ngSubmit)="onSaveRecord()" novalidate class="modal-body">            <!-- Campo Código con validación asíncrona -->            <div class="form-group">              <div class="label-row">                <label for="inv-codigo" class="form-label">Código Único (SKU)</label>                <span                   *ngIf="recordForm.get(\'codigo\')?.pending"                   class="async-verifying"                  aria-live="polite"                >                  ⏳ Comprobando disponibilidad en Supabase...                </span>              </div>              <input                 id="inv-codigo"                type="text"                formControlName="codigo"                class="form-control"                placeholder="EJ: PRD-5001"                [class.is-invalid]="recordForm.get(\'codigo\')?.touched && recordForm.get(\'codigo\')?.invalid"                aria-required="true"                aria-describedby="code-error"              />              <div                 *ngIf="recordForm.get(\'codigo\')?.touched && recordForm.get(\'codigo\')?.invalid"                 id="code-error"                 class="field-error"                role="alert"              >                <span *ngIf="recordForm.get(\'codigo\')?.errors?.[\'required\']">El código es obligatorio.</span>                <span *ngIf="recordForm.get(\'codigo\')?.errors?.[\'pattern\']">Sólo mayúsculas, números y guiones.</span>                <span *ngIf="recordForm.get(\'codigo\')?.errors?.[\'codeTaken\']" class="error-highlight">                  ⛔ Este código ya existe en la base de datos (Validación asíncrona RA 2).                </span>              </div>            </div>            <!-- Campo Nombre -->            <div class="form-group">              <label for="inv-nombre" class="form-label">Nombre del Activo</label>              <input                 id="inv-nombre"                type="text"                formControlName="nombre"                class="form-control"                placeholder="Nombre descriptivo completo"                [class.is-invalid]="recordForm.get(\'nombre\')?.touched && recordForm.get(\'nombre\')?.invalid"                aria-required="true"              />              <div *ngIf="recordForm.get(\'nombre\')?.touched && recordForm.get(\'nombre\')?.invalid" class="field-error">                Mínimo 4 caracteres requeridos.              </div>            </div>            <!-- Fila Categoría y Estado -->            <div class="form-row">              <div class="form-group flex-1">                <label for="inv-categoria" class="form-label">Categoría</label>                <select id="inv-categoria" formControlName="categoria" class="form-control">                  <option value="Hardware">Hardware</option>                  <option value="Software">Software</option>                  <option value="Redes">Redes</option>                  <option value="Servicios">Servicios</option>                  <option value="Periféricos">Periféricos</option>                </select>              </div>              <div class="form-group flex-1">                <label for="inv-estado" class="form-label">Estado</label>                <select id="inv-estado" formControlName="estado" class="form-control">                  <option value="Activo">Activo</option>                  <option value="Bajo Stock">Bajo Stock</option>                  <option value="Agotado">Agotado</option>                  <option value="En Revisión">En Revisión</option>                </select>              </div>            </div>            <!-- Fila Precio y Stock -->            <div class="form-row">              <div class="form-group flex-1">                <label for="inv-precio" class="form-label">Precio Unitario (€)</label>                <input                   id="inv-precio"                  type="number"                  step="0.01"                  formControlName="precio"                  class="form-control"                  [class.is-invalid]="recordForm.get(\'precio\')?.touched && recordForm.get(\'precio\')?.invalid"                />              </div>              <div class="form-group flex-1">                <label for="inv-stock" class="form-label">Unidades en Stock</label>                <input                   id="inv-stock"                  type="number"                  formControlName="stock"                  class="form-control"                  [class.is-invalid]="recordForm.get(\'stock\')?.touched && recordForm.get(\'stock\')?.invalid"                />              </div>            </div>            <!-- Descripción -->            <div class="form-group">              <label for="inv-desc" class="form-label">Descripción Técnica (Opcional)</label>              <textarea                 id="inv-desc"                rows="2"                formControlName="descripcion"                class="form-control"                placeholder="Detalles sobre especificaciones o ubicación..."              ></textarea>            </div>            <!-- Botones de Acción -->            <footer class="modal-footer">              <button type="button" class="btn-cancel" (click)="closeModal()">                Cancelar              </button>              <button                 type="submit"                 class="btn-save"                 [disabled]="recordForm.invalid || isSaving() || recordForm.pending"              >                <ion-spinner *ngIf="isSaving()" name="crescent" class="btn-spinner"></ion-spinner>                <span *ngIf="!isSaving()">                  {{ editingRecordId() ? \'Guardar Cambios\' : \'Registrar en Supabase\' }}                </span>              </button>            </footer>          </form>        </div>      </ng-template>    </ion-modal>  </main></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartWidgetComponent', 'selector': 'app-chart-widget'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'ExploreContainerComponent', 'selector': 'app-explore-container'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'InventoryPage', 'selector': 'app-inventory'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MetricCardComponent', 'selector': 'app-metric-card'},{'name': 'RealtimePage', 'selector': 'app-realtime'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'Tab1Page', 'selector': 'app-tab1'},{'name': 'Tab2Page', 'selector': 'app-tab2'},{'name': 'Tab3Page', 'selector': 'app-tab3'},{'name': 'TabsPage', 'selector': 'app-tabs'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'InventoryPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'InventoryPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,923 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-app-gestion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">mi-app-gestion documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  TabsPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/tabs/tabs.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Contenedor de Navegación Global (Tabs / Side Menu)
+Cumplimiento RA 1: Paso 1.1 - Sistema de navegación con soporte responsive y carga diferida.</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-tabs</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+</div>
+                        <div>    <code>IonTabs</code>
+</div>
+                        <div>    <code>IonTabBar</code>
+</div>
+                        <div>    <code>IonTabButton</code>
+</div>
+                        <div>    <code>IonIcon</code>
+</div>
+                        <div>    <code>IonLabel</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>tabs.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>tabs.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonTabs</code>
+                                </li>
+                                <li>
+                                        <code>IonTabBar</code>
+                                </li>
+                                <li>
+                                        <code>IonTabButton</code>
+                                </li>
+                                <li>
+                                        <code>IonIcon</code>
+                                </li>
+                                <li>
+                                        <code>IonLabel</code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/tabs/tabs.page.ts:43</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/tabs/tabs.page.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/tabs/tabs.page.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { 
+  IonTabs, 
+  IonTabBar, 
+  IonTabButton, 
+  IonIcon, 
+  IonLabel
+} from &#x27;@ionic/angular&#x27;;
+import { addIcons } from &#x27;ionicons&#x27;;
+import { 
+  pieChartOutline, 
+  cubeOutline, 
+  pulseOutline, 
+  documentTextOutline, 
+  helpCircleOutline,
+  logOutOutline,
+  personOutline
+} from &#x27;ionicons/icons&#x27;;
+import { AuthService } from &#x27;../services/auth.service&#x27;;
+
+/**
+ * Contenedor de Navegación Global (Tabs / Side Menu)
+ * Cumplimiento RA 1: Paso 1.1 - Sistema de navegación con soporte responsive y carga diferida.
+ */
+@Component({
+  selector: &#x27;app-tabs&#x27;,
+  templateUrl: &#x27;tabs.page.html&#x27;,
+  styleUrls: [&#x27;tabs.page.scss&#x27;],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    IonTabs, 
+    IonTabBar, 
+    IonTabButton, 
+    IonIcon, 
+    IonLabel
+  ],
+})
+export class TabsPage {
+  public authService &#x3D; inject(AuthService);
+
+  constructor() {
+    addIcons({ 
+      pieChartOutline, 
+      cubeOutline, 
+      pulseOutline, 
+      documentTextOutline, 
+      helpCircleOutline,
+      logOutOutline,
+      personOutline
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;tabs-layout-wrapper&quot;&gt;
+  &lt;!-- Barra Superior de Navegación de Escritorio y Perfil --&gt;
+  &lt;header class&#x3D;&quot;top-desktop-navbar&quot; role&#x3D;&quot;banner&quot;&gt;
+    &lt;div class&#x3D;&quot;brand-zone&quot;&gt;
+      &lt;span class&#x3D;&quot;brand-logo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;⚡&lt;/span&gt;
+      &lt;div class&#x3D;&quot;brand-text&quot;&gt;
+        &lt;span class&#x3D;&quot;app-name&quot;&gt;Sistema de Gestión Multiplataforma&lt;/span&gt;
+        &lt;span class&#x3D;&quot;app-tag&quot;&gt;DAM • Desarrollo de Interfaces&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;nav class&#x3D;&quot;desktop-nav-links&quot; aria-label&#x3D;&quot;Navegación principal de escritorio&quot;&gt;
+      &lt;a 
+        *ngIf&#x3D;&quot;authService.isAdmin()&quot; 
+        routerLink&#x3D;&quot;/tabs/dashboard&quot; 
+        routerLinkActive&#x3D;&quot;active&quot; 
+        class&#x3D;&quot;nav-link-item&quot;
+      &gt;
+        Cuadro de Mando
+      &lt;/a&gt;
+      &lt;a 
+        routerLink&#x3D;&quot;/tabs/inventory&quot; 
+        routerLinkActive&#x3D;&quot;active&quot; 
+        class&#x3D;&quot;nav-link-item&quot;
+      &gt;
+        Inventario (SQL)
+      &lt;/a&gt;
+      &lt;a 
+        routerLink&#x3D;&quot;/tabs/realtime&quot; 
+        routerLinkActive&#x3D;&quot;active&quot; 
+        class&#x3D;&quot;nav-link-item&quot;
+      &gt;
+        Tiempo Real (NoSQL)
+      &lt;/a&gt;
+      &lt;a 
+        *ngIf&#x3D;&quot;authService.isAdmin()&quot; 
+        routerLink&#x3D;&quot;/tabs/reports&quot; 
+        routerLinkActive&#x3D;&quot;active&quot; 
+        class&#x3D;&quot;nav-link-item&quot;
+      &gt;
+        Informes (PDF/CSV)
+      &lt;/a&gt;
+      &lt;a 
+        routerLink&#x3D;&quot;/tabs/help&quot; 
+        routerLinkActive&#x3D;&quot;active&quot; 
+        class&#x3D;&quot;nav-link-item&quot;
+      &gt;
+        Ayuda &amp; Doc
+      &lt;/a&gt;
+    &lt;/nav&gt;
+
+    &lt;div class&#x3D;&quot;user-profile-zone&quot;&gt;
+      &lt;div class&#x3D;&quot;user-info-text&quot;&gt;
+        &lt;span class&#x3D;&quot;user-fullname&quot;&gt;{{ (authService.currentUser$ | async)?.nombre }}&lt;/span&gt;
+        &lt;span 
+          class&#x3D;&quot;user-role-badge&quot; 
+          [class.admin]&#x3D;&quot;authService.isAdmin()&quot;
+        &gt;
+          {{ (authService.currentRole$ | async) &#x3D;&#x3D;&#x3D; &#x27;Admin&#x27; ? &#x27;ADMINISTRADOR&#x27; : &#x27;ESTÁNDAR&#x27; }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+      &lt;button 
+        type&#x3D;&quot;button&quot; 
+        class&#x3D;&quot;btn-logout&quot; 
+        (click)&#x3D;&quot;logout()&quot; 
+        aria-label&#x3D;&quot;Cerrar sesión en el sistema&quot;
+      &gt;
+        Salir
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;!-- Contenedor Ionic Tabs (Móvil y PWA) --&gt;
+  &lt;ion-tabs&gt;
+    &lt;ion-tab-bar slot&#x3D;&quot;bottom&quot; class&#x3D;&quot;custom-tab-bar&quot; aria-label&#x3D;&quot;Barra de pestañas de navegación&quot;&gt;
+      &lt;ion-tab-button 
+        *ngIf&#x3D;&quot;authService.isAdmin()&quot; 
+        tab&#x3D;&quot;dashboard&quot; 
+        href&#x3D;&quot;/tabs/dashboard&quot;
+        aria-label&#x3D;&quot;Pestaña Cuadro de Mando&quot;
+      &gt;
+        &lt;ion-icon aria-hidden&#x3D;&quot;true&quot; name&#x3D;&quot;pie-chart-outline&quot;&gt;&lt;/ion-icon&gt;
+        &lt;ion-label&gt;Dashboard&lt;/ion-label&gt;
+      &lt;/ion-tab-button&gt;
+
+      &lt;ion-tab-button 
+        tab&#x3D;&quot;inventory&quot; 
+        href&#x3D;&quot;/tabs/inventory&quot;
+        aria-label&#x3D;&quot;Pestaña Inventario SQL&quot;
+      &gt;
+        &lt;ion-icon aria-hidden&#x3D;&quot;true&quot; name&#x3D;&quot;cube-outline&quot;&gt;&lt;/ion-icon&gt;
+        &lt;ion-label&gt;Inventario&lt;/ion-label&gt;
+      &lt;/ion-tab-button&gt;
+
+      &lt;ion-tab-button 
+        tab&#x3D;&quot;realtime&quot; 
+        href&#x3D;&quot;/tabs/realtime&quot;
+        aria-label&#x3D;&quot;Pestaña Tiempo Real NoSQL&quot;
+      &gt;
+        &lt;ion-icon aria-hidden&#x3D;&quot;true&quot; name&#x3D;&quot;pulse-outline&quot;&gt;&lt;/ion-icon&gt;
+        &lt;ion-label&gt;En Vivo&lt;/ion-label&gt;
+      &lt;/ion-tab-button&gt;
+
+      &lt;ion-tab-button 
+        *ngIf&#x3D;&quot;authService.isAdmin()&quot; 
+        tab&#x3D;&quot;reports&quot; 
+        href&#x3D;&quot;/tabs/reports&quot;
+        aria-label&#x3D;&quot;Pestaña Informes y Exportación&quot;
+      &gt;
+        &lt;ion-icon aria-hidden&#x3D;&quot;true&quot; name&#x3D;&quot;document-text-outline&quot;&gt;&lt;/ion-icon&gt;
+        &lt;ion-label&gt;Informes&lt;/ion-label&gt;
+      &lt;/ion-tab-button&gt;
+
+      &lt;ion-tab-button 
+        tab&#x3D;&quot;help&quot; 
+        href&#x3D;&quot;/tabs/help&quot;
+        aria-label&#x3D;&quot;Pestaña Manual de Ayuda y Documentación&quot;
+      &gt;
+        &lt;ion-icon aria-hidden&#x3D;&quot;true&quot; name&#x3D;&quot;help-circle-outline&quot;&gt;&lt;/ion-icon&gt;
+        &lt;ion-label&gt;Ayuda&lt;/ion-label&gt;
+      &lt;/ion-tab-button&gt;
+    &lt;/ion-tab-bar&gt;
+  &lt;/ion-tabs&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>tabs.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.tabs-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.top-desktop-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #0f172a;
+  color: #ffffff;
+  border-bottom: 1px solid #1e293b;
+  z-index: 100;
+
+  @media (max-width: 860px) {
+    display: none; // En móvil se oculta y prevalece la barra inferior de pestañas de Ionic
+  }
+
+  .brand-zone {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .brand-logo {
+      font-size: 1.5rem;
+      background: #2563eb;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+
+      .app-name {
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .app-tag {
+        font-size: 0.72rem;
+        color: #94a3b8;
+      }
+    }
+  }
+
+  .desktop-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .nav-link-item {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      transition: background-color 0.2s, color 0.2s;
+
+      &amp;:hover {
+        color: #ffffff;
+        background-color: #1e293b;
+      }
+
+      &amp;.active {
+        background-color: #2563eb;
+        color: #ffffff;
+      }
+
+      &amp;:focus-visible {
+        outline: 2px solid #60a5fa;
+      }
+    }
+  }
+
+  .user-profile-zone {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .user-info-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .user-fullname {
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .user-role-badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        background: #334155;
+        color: #f1f5f9;
+
+        &amp;.admin {
+          background: #3b82f6;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid #475569;
+      color: #f8fafc;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+
+      &amp;:hover {
+        background: #dc2626;
+        border-color: #dc2626;
+      }
+
+      &amp;:focus-visible {
+        outline: 2px solid #ef4444;
+      }
+    }
+  }
+}
+
+.custom-tab-bar {
+  --background: #ffffff;
+  --border: 1px solid #e2e8f0;
+  border-top: 1px solid #e2e8f0;
+
+  @media (min-width: 861px) {
+    display: none; // En escritorio se muestra el menú superior estructurado
+  }
+
+  ion-tab-button {
+    --color: #64748b;
+    --color-selected: #2563eb;
+    font-size: 0.75rem;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="tabs-layout-wrapper">  <!-- Barra Superior de Navegación de Escritorio y Perfil -->  <header class="top-desktop-navbar" role="banner">    <div class="brand-zone">      <span class="brand-logo" aria-hidden="true">⚡</span>      <div class="brand-text">        <span class="app-name">Sistema de Gestión Multiplataforma</span>        <span class="app-tag">DAM • Desarrollo de Interfaces</span>      </div>    </div>    <nav class="desktop-nav-links" aria-label="Navegación principal de escritorio">      <a         *ngIf="authService.isAdmin()"         routerLink="/tabs/dashboard"         routerLinkActive="active"         class="nav-link-item"      >        Cuadro de Mando      </a>      <a         routerLink="/tabs/inventory"         routerLinkActive="active"         class="nav-link-item"      >        Inventario (SQL)      </a>      <a         routerLink="/tabs/realtime"         routerLinkActive="active"         class="nav-link-item"      >        Tiempo Real (NoSQL)      </a>      <a         *ngIf="authService.isAdmin()"         routerLink="/tabs/reports"         routerLinkActive="active"         class="nav-link-item"      >        Informes (PDF/CSV)      </a>      <a         routerLink="/tabs/help"         routerLinkActive="active"         class="nav-link-item"      >        Ayuda & Doc      </a>    </nav>    <div class="user-profile-zone">      <div class="user-info-text">        <span class="user-fullname">{{ (authService.currentUser$ | async)?.nombre }}</span>        <span           class="user-role-badge"           [class.admin]="authService.isAdmin()"        >          {{ (authService.currentRole$ | async) === \'Admin\' ? \'ADMINISTRADOR\' : \'ESTÁNDAR\' }}        </span>      </div>      <button         type="button"         class="btn-logout"         (click)="logout()"         aria-label="Cerrar sesión en el sistema"      >        Salir      </button>    </div>  </header>  <!-- Contenedor Ionic Tabs (Móvil y PWA) -->  <ion-tabs>    <ion-tab-bar slot="bottom" class="custom-tab-bar" aria-label="Barra de pestañas de navegación">      <ion-tab-button         *ngIf="authService.isAdmin()"         tab="dashboard"         href="/tabs/dashboard"        aria-label="Pestaña Cuadro de Mando"      >        <ion-icon aria-hidden="true" name="pie-chart-outline"></ion-icon>        <ion-label>Dashboard</ion-label>      </ion-tab-button>      <ion-tab-button         tab="inventory"         href="/tabs/inventory"        aria-label="Pestaña Inventario SQL"      >        <ion-icon aria-hidden="true" name="cube-outline"></ion-icon>        <ion-label>Inventario</ion-label>      </ion-tab-button>      <ion-tab-button         tab="realtime"         href="/tabs/realtime"        aria-label="Pestaña Tiempo Real NoSQL"      >        <ion-icon aria-hidden="true" name="pulse-outline"></ion-icon>        <ion-label>En Vivo</ion-label>      </ion-tab-button>      <ion-tab-button         *ngIf="authService.isAdmin()"         tab="reports"         href="/tabs/reports"        aria-label="Pestaña Informes y Exportación"      >        <ion-icon aria-hidden="true" name="document-text-outline"></ion-icon>        <ion-label>Informes</ion-label>      </ion-tab-button>      <ion-tab-button         tab="help"         href="/tabs/help"        aria-label="Pestaña Manual de Ayuda y Documentación"      >        <ion-icon aria-hidden="true" name="help-circle-outline"></ion-icon>        <ion-label>Ayuda</ion-label>      </ion-tab-button>    </ion-tab-bar>  </ion-tabs></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartWidgetComponent', 'selector': 'app-chart-widget'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'ExploreContainerComponent', 'selector': 'app-explore-container'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'InventoryPage', 'selector': 'app-inventory'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MetricCardComponent', 'selector': 'app-metric-card'},{'name': 'RealtimePage', 'selector': 'app-realtime'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'Tab1Page', 'selector': 'app-tab1'},{'name': 'Tab2Page', 'selector': 'app-tab2'},{'name': 'Tab3Page', 'selector': 'app-tab3'},{'name': 'TabsPage', 'selector': 'app-tabs'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TabsPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TabsPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

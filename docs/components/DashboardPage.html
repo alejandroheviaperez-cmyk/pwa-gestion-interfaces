@@ -1,0 +1,1953 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-app-gestion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">mi-app-gestion documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DashboardPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/dashboard/dashboard.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Vista de Cuadro de Mando e Informes Visuales para Administradores
+Cumplimiento RA 5: Paso 3.2 - Dashboard interactivo con filtros en tiempo real y gráficos consolidados.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+    </div>
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dashboard</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonHeader</code>
+</div>
+                        <div>    <code>IonToolbar</code>
+</div>
+                        <div>    <code>IonTitle</code>
+</div>
+                        <div>    <code>IonButtons</code>
+</div>
+                        <div>    <code>IonButton</code>
+</div>
+                        <div>    <code>IonSpinner</code>
+</div>
+                        <div>    <code>IonBadge</code>
+</div>
+                        <div>        <code><a href="../components/MetricCardComponent.html" target="_self" >MetricCardComponent</a></code>
+</div>
+                        <div>        <code><a href="../components/ChartWidgetComponent.html" target="_self" >ChartWidgetComponent</a></code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./dashboard.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./dashboard.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonHeader</code>
+                                </li>
+                                <li>
+                                        <code>IonToolbar</code>
+                                </li>
+                                <li>
+                                        <code>IonTitle</code>
+                                </li>
+                                <li>
+                                        <code>IonButtons</code>
+                                </li>
+                                <li>
+                                        <code>IonButton</code>
+                                </li>
+                                <li>
+                                        <code>IonSpinner</code>
+                                </li>
+                                <li>
+                                        <code>IonBadge</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/MetricCardComponent.html" target="_self" >MetricCardComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ChartWidgetComponent.html" target="_self" >ChartWidgetComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#auditLogs" >auditLogs</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#barChartDatasets" >barChartDatasets</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#barChartLabels" >barChartLabels</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#categories" >categories</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#doughnutDatasets" >doughnutDatasets</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#doughnutLabels" >doughnutLabels</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#filteredRecords" >filteredRecords</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#lineChartDatasets" >lineChartDatasets</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#lineChartLabels" >lineChartLabels</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#records" >records</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#reportService" >reportService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectedCategory" >selectedCategory</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#selectedStatus" >selectedStatus</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#summary" >summary</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadConsolidatedData" >loadConsolidatedData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#setCategoryFilter" >setCategoryFilter</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#setStatusFilter" >setStatusFilter</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadConsolidatedData"></a>
+                    <span class="name">
+                        <span ><b>loadConsolidatedData</b></span>
+                        <a href="#loadConsolidatedData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadConsolidatedData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setCategoryFilter"></a>
+                    <span class="name">
+                        <span ><b>setCategoryFilter</b></span>
+                        <a href="#setCategoryFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setCategoryFilter(category: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>category</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setStatusFilter"></a>
+                    <span class="name">
+                        <span ><b>setStatusFilter</b></span>
+                        <a href="#setStatusFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setStatusFilter(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="auditLogs"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>auditLogs</b></span>
+                        <a href="#auditLogs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;AuditLog[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="barChartDatasets"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>barChartDatasets</b></span>
+                        <a href="#barChartDatasets"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getCategoryDistribution(this.filteredRecords());
+    return [
+      {
+        label: &#x27;Unidades en Stock&#x27;,
+        data: dist.counts,
+        backgroundColor: &#x27;rgba(56, 128, 255, 0.8)&#x27;,
+        borderRadius: 6
+      },
+      {
+        label: &#x27;Valoración en Miles (€)&#x27;,
+        data: dist.values.map(v &#x3D;&gt; Math.round(v / 100) / 10),
+        backgroundColor: &#x27;rgba(45, 211, 111, 0.8)&#x27;,
+        borderRadius: 6
+      }
+    ];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="barChartLabels"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>barChartLabels</b></span>
+                        <a href="#barChartLabels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getCategoryDistribution(this.filteredRecords());
+    return dist.categories;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categories"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>categories</b></span>
+                        <a href="#categories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const raw &#x3D; this.records().map(r &#x3D;&gt; r.categoria);
+    return [&#x27;TODAS&#x27;, ...Array.from(new Set(raw))];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="doughnutDatasets"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>doughnutDatasets</b></span>
+                        <a href="#doughnutDatasets"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getStatusDistribution(this.filteredRecords());
+    return [
+      {
+        data: dist.counts,
+        backgroundColor: [
+          &#x27;#2dd36f&#x27;, // Activo (Verde)
+          &#x27;#ffc409&#x27;, // Bajo Stock (Amarillo)
+          &#x27;#eb445a&#x27;, // Agotado (Rojo)
+          &#x27;#92949c&#x27;  // En Revisión (Gris)
+        ]
+      }
+    ];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="doughnutLabels"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>doughnutLabels</b></span>
+                        <a href="#doughnutLabels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getStatusDistribution(this.filteredRecords());
+    return dist.statuses;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredRecords"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>filteredRecords</b></span>
+                        <a href="#filteredRecords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    let list &#x3D; this.records();
+    const cat &#x3D; this.selectedCategory();
+    const st &#x3D; this.selectedStatus();
+
+    if (cat !&#x3D;&#x3D; &#x27;TODAS&#x27;) {
+      list &#x3D; list.filter(r &#x3D;&gt; r.categoria &#x3D;&#x3D;&#x3D; cat);
+    }
+    if (st !&#x3D;&#x3D; &#x27;TODOS&#x27;) {
+      list &#x3D; list.filter(r &#x3D;&gt; r.estado &#x3D;&#x3D;&#x3D; st);
+    }
+    return list;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lineChartDatasets"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>lineChartDatasets</b></span>
+                        <a href="#lineChartDatasets"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const totalLogs &#x3D; this.auditLogs().length;
+    return [
+      {
+        label: &#x27;Eventos NoSQL Firebase en Tiempo Real&#x27;,
+        data: [
+          Math.max(1, Math.round(totalLogs * 0.2)),
+          Math.max(2, Math.round(totalLogs * 0.4)),
+          Math.max(2, Math.round(totalLogs * 0.3)),
+          Math.max(3, Math.round(totalLogs * 0.7)),
+          Math.max(4, Math.round(totalLogs * 0.9)),
+          totalLogs
+        ],
+        fill: true,
+        borderColor: &#x27;#5260ff&#x27;,
+        backgroundColor: &#x27;rgba(82, 96, 255, 0.1)&#x27;,
+        tension: 0.35
+      }
+    ];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="lineChartLabels"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>lineChartLabels</b></span>
+                        <a href="#lineChartLabels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    return [&#x27;Hace 50m&#x27;, &#x27;Hace 40m&#x27;, &#x27;Hace 30m&#x27;, &#x27;Hace 20m&#x27;, &#x27;Hace 10m&#x27;, &#x27;Ahora&#x27;];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="records"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>records</b></span>
+                        <a href="#records"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;BusinessRecord[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reportService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>reportService</b></span>
+                        <a href="#reportService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReportDataService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedCategory"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>selectedCategory</b></span>
+                        <a href="#selectedCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;TODAS&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>selectedStatus</b></span>
+                        <a href="#selectedStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string&gt;(&#x27;TODOS&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="summary"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>summary</b></span>
+                        <a href="#summary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed&lt;DashboardSummary&gt;(() &#x3D;&gt; {
+    return this.reportService.calculateSummary(this.filteredRecords(), this.auditLogs());
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/pages/dashboard/dashboard.page.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { 
+  Component, 
+  OnInit, 
+  inject, 
+  signal, 
+  computed, 
+  ChangeDetectionStrategy 
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { 
+  IonContent, 
+  IonHeader, 
+  IonToolbar, 
+  IonTitle, 
+  IonButtons, 
+  IonButton, 
+  IonSpinner, 
+  IonBadge
+} from &#x27;@ionic/angular&#x27;;
+import { ReportDataService } from &#x27;../../services/report-data.service&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { BusinessRecord } from &#x27;../../models/record.model&#x27;;
+import { AuditLog } from &#x27;../../models/audit-log.model&#x27;;
+import { DashboardSummary } from &#x27;../../models/metric.model&#x27;;
+import { MetricCardComponent } from &#x27;../../components/metric-card/metric-card.component&#x27;;
+import { ChartWidgetComponent } from &#x27;../../components/chart-widget/chart-widget.component&#x27;;
+
+/**
+ * Vista de Cuadro de Mando e Informes Visuales para Administradores
+ * Cumplimiento RA 5: Paso 3.2 - Dashboard interactivo con filtros en tiempo real y gráficos consolidados.
+ */
+@Component({
+  selector: &#x27;app-dashboard&#x27;,
+  templateUrl: &#x27;./dashboard.page.html&#x27;,
+  styleUrls: [&#x27;./dashboard.page.scss&#x27;],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonButton,
+    IonSpinner,
+    IonBadge,
+    MetricCardComponent,
+    ChartWidgetComponent
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DashboardPage implements OnInit {
+  private reportService &#x3D; inject(ReportDataService);
+  public authService &#x3D; inject(AuthService);
+
+  // Estado reactivo con Signals
+  public isLoading &#x3D; signal&lt;boolean&gt;(true);
+  public records &#x3D; signal&lt;BusinessRecord[]&gt;([]);
+  public auditLogs &#x3D; signal&lt;AuditLog[]&gt;([]);
+
+  // Filtros reactivos interactivos en tiempo real
+  public selectedCategory &#x3D; signal&lt;string&gt;(&#x27;TODAS&#x27;);
+  public selectedStatus &#x3D; signal&lt;string&gt;(&#x27;TODOS&#x27;);
+
+  // Categorías disponibles
+  public categories &#x3D; computed(() &#x3D;&gt; {
+    const raw &#x3D; this.records().map(r &#x3D;&gt; r.categoria);
+    return [&#x27;TODAS&#x27;, ...Array.from(new Set(raw))];
+  });
+
+  // Registros filtrados dinámicamente según filtros activos
+  public filteredRecords &#x3D; computed(() &#x3D;&gt; {
+    let list &#x3D; this.records();
+    const cat &#x3D; this.selectedCategory();
+    const st &#x3D; this.selectedStatus();
+
+    if (cat !&#x3D;&#x3D; &#x27;TODAS&#x27;) {
+      list &#x3D; list.filter(r &#x3D;&gt; r.categoria &#x3D;&#x3D;&#x3D; cat);
+    }
+    if (st !&#x3D;&#x3D; &#x27;TODOS&#x27;) {
+      list &#x3D; list.filter(r &#x3D;&gt; r.estado &#x3D;&#x3D;&#x3D; st);
+    }
+    return list;
+  });
+
+  // KPIs calculados reactivamente
+  public summary &#x3D; computed&lt;DashboardSummary&gt;(() &#x3D;&gt; {
+    return this.reportService.calculateSummary(this.filteredRecords(), this.auditLogs());
+  });
+
+  // Datos para Gráfico 1: Stock y Valoración por Categoría (Barras)
+  public barChartLabels &#x3D; computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getCategoryDistribution(this.filteredRecords());
+    return dist.categories;
+  });
+
+  public barChartDatasets &#x3D; computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getCategoryDistribution(this.filteredRecords());
+    return [
+      {
+        label: &#x27;Unidades en Stock&#x27;,
+        data: dist.counts,
+        backgroundColor: &#x27;rgba(56, 128, 255, 0.8)&#x27;,
+        borderRadius: 6
+      },
+      {
+        label: &#x27;Valoración en Miles (€)&#x27;,
+        data: dist.values.map(v &#x3D;&gt; Math.round(v / 100) / 10),
+        backgroundColor: &#x27;rgba(45, 211, 111, 0.8)&#x27;,
+        borderRadius: 6
+      }
+    ];
+  });
+
+  // Datos para Gráfico 2: Distribución por Estado (Doughnut)
+  public doughnutLabels &#x3D; computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getStatusDistribution(this.filteredRecords());
+    return dist.statuses;
+  });
+
+  public doughnutDatasets &#x3D; computed(() &#x3D;&gt; {
+    const dist &#x3D; this.reportService.getStatusDistribution(this.filteredRecords());
+    return [
+      {
+        data: dist.counts,
+        backgroundColor: [
+          &#x27;#2dd36f&#x27;, // Activo (Verde)
+          &#x27;#ffc409&#x27;, // Bajo Stock (Amarillo)
+          &#x27;#eb445a&#x27;, // Agotado (Rojo)
+          &#x27;#92949c&#x27;  // En Revisión (Gris)
+        ]
+      }
+    ];
+  });
+
+  // Datos para Gráfico 3: Actividad en Tiempo Real por Tipo de Acción (Líneas)
+  public lineChartLabels &#x3D; computed(() &#x3D;&gt; {
+    return [&#x27;Hace 50m&#x27;, &#x27;Hace 40m&#x27;, &#x27;Hace 30m&#x27;, &#x27;Hace 20m&#x27;, &#x27;Hace 10m&#x27;, &#x27;Ahora&#x27;];
+  });
+
+  public lineChartDatasets &#x3D; computed(() &#x3D;&gt; {
+    const totalLogs &#x3D; this.auditLogs().length;
+    return [
+      {
+        label: &#x27;Eventos NoSQL Firebase en Tiempo Real&#x27;,
+        data: [
+          Math.max(1, Math.round(totalLogs * 0.2)),
+          Math.max(2, Math.round(totalLogs * 0.4)),
+          Math.max(2, Math.round(totalLogs * 0.3)),
+          Math.max(3, Math.round(totalLogs * 0.7)),
+          Math.max(4, Math.round(totalLogs * 0.9)),
+          totalLogs
+        ],
+        fill: true,
+        borderColor: &#x27;#5260ff&#x27;,
+        backgroundColor: &#x27;rgba(82, 96, 255, 0.1)&#x27;,
+        tension: 0.35
+      }
+    ];
+  });
+
+  ngOnInit(): void {
+    this.loadConsolidatedData();
+  }
+
+  loadConsolidatedData(): void {
+    this.isLoading.set(true);
+    this.reportService.getConsolidatedData().subscribe({
+      next: ({ records, logs }) &#x3D;&gt; {
+        this.records.set(records);
+        this.auditLogs.set(logs);
+        this.isLoading.set(false);
+      },
+      error: (err) &#x3D;&gt; {
+        console.error(&#x27;Error al recuperar datos:&#x27;, err);
+        this.isLoading.set(false);
+      }
+    });
+  }
+
+  setCategoryFilter(category: string): void {
+    this.selectedCategory.set(category);
+  }
+
+  setStatusFilter(status: string): void {
+    this.selectedStatus.set(status);
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-header [translucent]&#x3D;&quot;true&quot;&gt;
+  &lt;ion-toolbar color&#x3D;&quot;primary&quot;&gt;
+    &lt;ion-title&gt;Cuadro de Mando Ejecutivo (Admin)&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;end&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;loadConsolidatedData()&quot; aria-label&#x3D;&quot;Actualizar datos consolidados&quot;&gt;
+        Actualizar
+      &lt;/ion-button&gt;
+      &lt;ion-button (click)&#x3D;&quot;logout()&quot; fill&#x3D;&quot;clear&quot; color&#x3D;&quot;light&quot; aria-label&#x3D;&quot;Cerrar sesión actual&quot;&gt;
+        Salir
+      &lt;/ion-button&gt;
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+&lt;/ion-header&gt;
+
+&lt;ion-content [fullscreen]&#x3D;&quot;true&quot; class&#x3D;&quot;dashboard-content&quot;&gt;
+  &lt;main class&#x3D;&quot;dashboard-main&quot; role&#x3D;&quot;main&quot;&gt;
+    &lt;!-- Encabezado con información de contexto --&gt;
+    &lt;header class&#x3D;&quot;page-intro&quot;&gt;
+      &lt;div class&#x3D;&quot;intro-text&quot;&gt;
+        &lt;h2 class&#x3D;&quot;section-title&quot;&gt;Consolidación de Métricas Empresariales&lt;/h2&gt;
+        &lt;p class&#x3D;&quot;section-desc&quot;&gt;
+          Orquestación asíncrona dual: Persistencia SQL vía &lt;strong&gt;Supabase REST&lt;/strong&gt; y telemetría en tiempo real vía &lt;strong&gt;Firebase Firestore (NoSQL)&lt;/strong&gt;.
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;user-pill&quot; role&#x3D;&quot;status&quot;&gt;
+        &lt;span class&#x3D;&quot;user-dot&quot;&gt;&lt;/span&gt;
+        &lt;span&gt;Sesión: &lt;strong&gt;{{ (authService.currentUser$ | async)?.nombre }}&lt;/strong&gt;&lt;/span&gt;
+        &lt;ion-badge color&#x3D;&quot;tertiary&quot;&gt;Rol: Administrador&lt;/ion-badge&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Indicador de Carga Asíncrona --&gt;
+    &lt;div *ngIf&#x3D;&quot;isLoading()&quot; class&#x3D;&quot;loading-state&quot; role&#x3D;&quot;status&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+      &lt;ion-spinner name&#x3D;&quot;crescent&quot; color&#x3D;&quot;primary&quot;&gt;&lt;/ion-spinner&gt;
+      &lt;p&gt;Consultando concurrentemente orígenes SQL (Supabase) y NoSQL (Firebase)...&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div *ngIf&#x3D;&quot;!isLoading()&quot; class&#x3D;&quot;dashboard-body&quot;&gt;
+      &lt;!-- BARRA DE FILTROS EN TIEMPO REAL (Paso 3.2 y RA 5) --&gt;
+      &lt;section class&#x3D;&quot;filters-bar&quot; role&#x3D;&quot;search&quot; aria-label&#x3D;&quot;Filtros del cuadro de mando&quot;&gt;
+        &lt;div class&#x3D;&quot;filter-group&quot;&gt;
+          &lt;label for&#x3D;&quot;category-filter-select&quot; class&#x3D;&quot;filter-label&quot;&gt;Filtrar por Categoría:&lt;/label&gt;
+          &lt;select 
+            id&#x3D;&quot;category-filter-select&quot;
+            class&#x3D;&quot;filter-select&quot; 
+            [value]&#x3D;&quot;selectedCategory()&quot;
+            (change)&#x3D;&quot;setCategoryFilter($any($event.target).value)&quot;
+            aria-label&#x3D;&quot;Filtrar métricas por categoría&quot;
+          &gt;
+            &lt;option *ngFor&#x3D;&quot;let cat of categories()&quot; [value]&#x3D;&quot;cat&quot;&gt;
+              {{ cat }}
+            &lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;filter-group&quot;&gt;
+          &lt;label for&#x3D;&quot;status-filter-select&quot; class&#x3D;&quot;filter-label&quot;&gt;Filtrar por Estado:&lt;/label&gt;
+          &lt;select 
+            id&#x3D;&quot;status-filter-select&quot;
+            class&#x3D;&quot;filter-select&quot; 
+            [value]&#x3D;&quot;selectedStatus()&quot;
+            (change)&#x3D;&quot;setStatusFilter($any($event.target).value)&quot;
+            aria-label&#x3D;&quot;Filtrar métricas por estado&quot;
+          &gt;
+            &lt;option value&#x3D;&quot;TODOS&quot;&gt;Todos los Estados&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Activo&quot;&gt;Activos&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Bajo Stock&quot;&gt;Bajo Stock (&amp;lt; 5)&lt;/option&gt;
+            &lt;option value&#x3D;&quot;Agotado&quot;&gt;Agotados (0)&lt;/option&gt;
+            &lt;option value&#x3D;&quot;En Revisión&quot;&gt;En Revisión&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;active-filter-summary&quot;&gt;
+          &lt;span&gt;Registros activos filtrados: &lt;strong&gt;{{ filteredRecords().length }}&lt;/strong&gt; de {{ records().length }}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;!-- TARJETAS MÉTRICAS / KPIS (Componente Reutilizable 2 - RA 3) --&gt;
+      &lt;section class&#x3D;&quot;kpi-grid&quot; aria-label&#x3D;&quot;Indicadores clave de rendimiento&quot;&gt;
+        &lt;app-metric-card
+          title&#x3D;&quot;Total Activos (SQL)&quot;
+          [value]&#x3D;&quot;summary().totalRegistros&quot;
+          subtitle&#x3D;&quot;Registros procesados en Supabase&quot;
+          color&#x3D;&quot;primary&quot;
+          [trend]&#x3D;&quot;{ percentage: 12.4, isPositive: true }&quot;
+        &gt;&lt;/app-metric-card&gt;
+
+        &lt;app-metric-card
+          title&#x3D;&quot;Stock Total Físico&quot;
+          [value]&#x3D;&quot;summary().stockTotal + &#x27; uds.&#x27;&quot;
+          subtitle&#x3D;&quot;Disponibilidad en almacén&quot;
+          color&#x3D;&quot;success&quot;
+          [trend]&#x3D;&quot;{ percentage: 5.2, isPositive: true }&quot;
+        &gt;&lt;/app-metric-card&gt;
+
+        &lt;app-metric-card
+          title&#x3D;&quot;Valoración de Inventario&quot;
+          [value]&#x3D;&quot;&#x27;€&#x27; + (summary().valorTotalInventario | number:&#x27;1.2-2&#x27;)&quot;
+          subtitle&#x3D;&quot;Cálculo monetario consolidado&quot;
+          color&#x3D;&quot;tertiary&quot;
+          [trend]&#x3D;&quot;{ percentage: 8.7, isPositive: true }&quot;
+        &gt;&lt;/app-metric-card&gt;
+
+        &lt;app-metric-card
+          title&#x3D;&quot;Auditoría NoSQL (Firebase)&quot;
+          [value]&#x3D;&quot;summary().logsEnTiempoReal&quot;
+          subtitle&#x3D;&quot;Eventos capturados en Firestore&quot;
+          color&#x3D;&quot;warning&quot;
+          [trend]&#x3D;&quot;{ percentage: 19.3, isPositive: true }&quot;
+        &gt;&lt;/app-metric-card&gt;
+      &lt;/section&gt;
+
+      &lt;!-- PANELES DE GRÁFICOS VISUALES (Chart.js - RA 5) --&gt;
+      &lt;section class&#x3D;&quot;charts-grid&quot; aria-label&#x3D;&quot;Visualizaciones analíticas&quot;&gt;
+        &lt;div class&#x3D;&quot;chart-column main&quot;&gt;
+          &lt;app-chart-widget
+            type&#x3D;&quot;bar&quot;
+            [labels]&#x3D;&quot;barChartLabels()&quot;
+            [datasets]&#x3D;&quot;barChartDatasets()&quot;
+            title&#x3D;&quot;Stock y Valoración Monetaria por Categoría&quot;
+            subtitle&#x3D;&quot;Representación comparativa entre existencias físicas y valor contable&quot;
+            [height]&#x3D;&quot;320&quot;
+          &gt;&lt;/app-chart-widget&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;chart-column side&quot;&gt;
+          &lt;app-chart-widget
+            type&#x3D;&quot;doughnut&quot;
+            [labels]&#x3D;&quot;doughnutLabels()&quot;
+            [datasets]&#x3D;&quot;doughnutDatasets()&quot;
+            title&#x3D;&quot;Distribución del Estado Operativo&quot;
+            subtitle&#x3D;&quot;Proporción según disponibilidad de existencias&quot;
+            [height]&#x3D;&quot;320&quot;
+          &gt;&lt;/app-chart-widget&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;chart-column full&quot;&gt;
+          &lt;app-chart-widget
+            type&#x3D;&quot;line&quot;
+            [labels]&#x3D;&quot;lineChartLabels()&quot;
+            [datasets]&#x3D;&quot;lineChartDatasets()&quot;
+            title&#x3D;&quot;Telemetría de Eventos en Tiempo Real (Firebase Firestore)&quot;
+            subtitle&#x3D;&quot;Frecuencia de transacciones y auditoría distribuida capturada&quot;
+            [height]&#x3D;&quot;240&quot;
+          &gt;&lt;/app-chart-widget&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./dashboard.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.dashboard-content {
+  --background: #f8fafc;
+}
+
+.dashboard-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+}
+
+.page-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .section-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .section-desc {
+    font-size: 0.9rem;
+    color: #475569;
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .user-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    color: #334155;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+    .user-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  color: #64748b;
+  font-size: 0.95rem;
+
+  ion-spinner {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+  }
+}
+
+.filters-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .filter-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #334155;
+      white-space: nowrap;
+    }
+
+    .filter-select {
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.85rem;
+      color: #0f172a;
+      background: #f8fafc;
+      outline: none;
+      transition: border-color 0.2s;
+
+      &amp;:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+      }
+    }
+  }
+
+  .active-filter-summary {
+    margin-left: auto;
+    font-size: 0.82rem;
+    color: #64748b;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.25rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-column {
+    &amp;.main {
+      grid-column: span 1;
+    }
+
+    &amp;.side {
+      grid-column: span 1;
+    }
+
+    &amp;.full {
+      grid-column: 1 / -1;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-header [translucent]="true">  <ion-toolbar color="primary">    <ion-title>Cuadro de Mando Ejecutivo (Admin)</ion-title>    <ion-buttons slot="end">      <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar datos consolidados">        Actualizar      </ion-button>      <ion-button (click)="logout()" fill="clear" color="light" aria-label="Cerrar sesión actual">        Salir      </ion-button>    </ion-buttons>  </ion-toolbar></ion-header><ion-content [fullscreen]="true" class="dashboard-content">  <main class="dashboard-main" role="main">    <!-- Encabezado con información de contexto -->    <header class="page-intro">      <div class="intro-text">        <h2 class="section-title">Consolidación de Métricas Empresariales</h2>        <p class="section-desc">          Orquestación asíncrona dual: Persistencia SQL vía <strong>Supabase REST</strong> y telemetría en tiempo real vía <strong>Firebase Firestore (NoSQL)</strong>.        </p>      </div>      <div class="user-pill" role="status">        <span class="user-dot"></span>        <span>Sesión: <strong>{{ (authService.currentUser$ | async)?.nombre }}</strong></span>        <ion-badge color="tertiary">Rol: Administrador</ion-badge>      </div>    </header>    <!-- Indicador de Carga Asíncrona -->    <div *ngIf="isLoading()" class="loading-state" role="status" aria-live="polite">      <ion-spinner name="crescent" color="primary"></ion-spinner>      <p>Consultando concurrentemente orígenes SQL (Supabase) y NoSQL (Firebase)...</p>    </div>    <div *ngIf="!isLoading()" class="dashboard-body">      <!-- BARRA DE FILTROS EN TIEMPO REAL (Paso 3.2 y RA 5) -->      <section class="filters-bar" role="search" aria-label="Filtros del cuadro de mando">        <div class="filter-group">          <label for="category-filter-select" class="filter-label">Filtrar por Categoría:</label>          <select             id="category-filter-select"            class="filter-select"             [value]="selectedCategory()"            (change)="setCategoryFilter($any($event.target).value)"            aria-label="Filtrar métricas por categoría"          >            <option *ngFor="let cat of categories()" [value]="cat">              {{ cat }}            </option>          </select>        </div>        <div class="filter-group">          <label for="status-filter-select" class="filter-label">Filtrar por Estado:</label>          <select             id="status-filter-select"            class="filter-select"             [value]="selectedStatus()"            (change)="setStatusFilter($any($event.target).value)"            aria-label="Filtrar métricas por estado"          >            <option value="TODOS">Todos los Estados</option>            <option value="Activo">Activos</option>            <option value="Bajo Stock">Bajo Stock (&lt; 5)</option>            <option value="Agotado">Agotados (0)</option>            <option value="En Revisión">En Revisión</option>          </select>        </div>        <div class="active-filter-summary">          <span>Registros activos filtrados: <strong>{{ filteredRecords().length }}</strong> de {{ records().length }}</span>        </div>      </section>      <!-- TARJETAS MÉTRICAS / KPIS (Componente Reutilizable 2 - RA 3) -->      <section class="kpi-grid" aria-label="Indicadores clave de rendimiento">        <app-metric-card          title="Total Activos (SQL)"          [value]="summary().totalRegistros"          subtitle="Registros procesados en Supabase"          color="primary"          [trend]="{ percentage: 12.4, isPositive: true }"        ></app-metric-card>        <app-metric-card          title="Stock Total Físico"          [value]="summary().stockTotal + \' uds.\'"          subtitle="Disponibilidad en almacén"          color="success"          [trend]="{ percentage: 5.2, isPositive: true }"        ></app-metric-card>        <app-metric-card          title="Valoración de Inventario"          [value]="\'€\' + (summary().valorTotalInventario | number:\'1.2-2\')"          subtitle="Cálculo monetario consolidado"          color="tertiary"          [trend]="{ percentage: 8.7, isPositive: true }"        ></app-metric-card>        <app-metric-card          title="Auditoría NoSQL (Firebase)"          [value]="summary().logsEnTiempoReal"          subtitle="Eventos capturados en Firestore"          color="warning"          [trend]="{ percentage: 19.3, isPositive: true }"        ></app-metric-card>      </section>      <!-- PANELES DE GRÁFICOS VISUALES (Chart.js - RA 5) -->      <section class="charts-grid" aria-label="Visualizaciones analíticas">        <div class="chart-column main">          <app-chart-widget            type="bar"            [labels]="barChartLabels()"            [datasets]="barChartDatasets()"            title="Stock y Valoración Monetaria por Categoría"            subtitle="Representación comparativa entre existencias físicas y valor contable"            [height]="320"          ></app-chart-widget>        </div>        <div class="chart-column side">          <app-chart-widget            type="doughnut"            [labels]="doughnutLabels()"            [datasets]="doughnutDatasets()"            title="Distribución del Estado Operativo"            subtitle="Proporción según disponibilidad de existencias"            [height]="320"          ></app-chart-widget>        </div>        <div class="chart-column full">          <app-chart-widget            type="line"            [labels]="lineChartLabels()"            [datasets]="lineChartDatasets()"            title="Telemetría de Eventos en Tiempo Real (Firebase Firestore)"            subtitle="Frecuencia de transacciones y auditoría distribuida capturada"            [height]="240"          ></app-chart-widget>        </div>      </section>    </div>  </main></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartWidgetComponent', 'selector': 'app-chart-widget'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'ExploreContainerComponent', 'selector': 'app-explore-container'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'InventoryPage', 'selector': 'app-inventory'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MetricCardComponent', 'selector': 'app-metric-card'},{'name': 'RealtimePage', 'selector': 'app-realtime'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'Tab1Page', 'selector': 'app-tab1'},{'name': 'Tab2Page', 'selector': 'app-tab2'},{'name': 'Tab3Page', 'selector': 'app-tab3'},{'name': 'TabsPage', 'selector': 'app-tabs'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DashboardPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DashboardPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

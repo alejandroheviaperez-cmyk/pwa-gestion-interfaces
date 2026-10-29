@@ -1,0 +1,1753 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>mi-app-gestion documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">mi-app-gestion documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LoginPage</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/login/login.page.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-login</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>IonContent</code>
+</div>
+                        <div>    <code>IonSpinner</code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./login.page.scss</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./login.page.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>IonContent</code>
+                                </li>
+                                <li>
+                                        <code>IonSpinner</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#activeTab" >activeTab</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#loginForm" >loginForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#registerForm" >registerForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Public</span>
+                                <a href="#successMessage" >successMessage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#initForms" >initForms</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onLoginSubmit" >onLoginSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#onRegisterSubmit" >onRegisterSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#quickLogin" >quickLogin</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForms"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>initForms</b></span>
+                        <a href="#initForms"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>initForms()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/login/login.page.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/login/login.page.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onLoginSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onLoginSubmit</b></span>
+                        <a href="#onLoginSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onLoginSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/login/login.page.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onRegisterSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onRegisterSubmit</b></span>
+                        <a href="#onRegisterSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onRegisterSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/login/login.page.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quickLogin"></a>
+                    <span class="name">
+                        <span ><b>quickLogin</b></span>
+                        <a href="#quickLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>quickLogin(role: "Admin" | "Standard")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/login/login.page.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>role</td>
+                                            <td>
+                                                        <code>&quot;Admin&quot; | &quot;Standard&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeTab"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>activeTab</b></span>
+                        <a href="#activeTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;login&quot; | &quot;register&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;login&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/login/login.page.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/login/login.page.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>errorMessage</b></span>
+                        <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/login/login.page.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/login/login.page.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/login/login.page.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loginForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>loginForm</b></span>
+                        <a href="#loginForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/login/login.page.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registerForm"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>registerForm</b></span>
+                        <a href="#registerForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.dev/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/login/login.page.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/login/login.page.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="successMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>successMessage</b></span>
+                        <a href="#successMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/login/login.page.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { 
+  FormBuilder, 
+  FormGroup, 
+  Validators, 
+  ReactiveFormsModule, 
+  AbstractControl, 
+  AsyncValidatorFn 
+} from &#x27;@angular/forms&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { 
+  IonContent, 
+  IonSpinner 
+} from &#x27;@ionic/angular&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { map, catchError } from &#x27;rxjs/operators&#x27;;
+import { AuthService } from &#x27;../services/auth.service&#x27;;
+
+/**
+ * Validador Asíncrono para verificar si un correo ya se encuentra registrado
+ * Cumplimiento RA 2: Validaciones asíncronas contra servicio gestionando el estado del componente.
+ */
+export function uniqueEmailValidator(authService: AuthService): AsyncValidatorFn {
+  return (control: AbstractControl): Observable&lt;{ emailTaken: boolean } | null&gt; &#x3D;&gt; {
+    if (!control.value || control.value.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return of(null);
+    }
+    return authService.checkEmailExists(control.value).pipe(
+      map(exists &#x3D;&gt; (exists ? { emailTaken: true } : null)),
+      catchError(() &#x3D;&gt; of(null))
+    );
+  };
+}
+
+@Component({
+  selector: &#x27;app-login&#x27;,
+  templateUrl: &#x27;./login.page.html&#x27;,
+  styleUrls: [&#x27;./login.page.scss&#x27;],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IonContent,
+    IonSpinner
+  ]
+})
+export class LoginPage implements OnInit {
+  private fb &#x3D; inject(FormBuilder);
+  private authService &#x3D; inject(AuthService);
+  private router &#x3D; inject(Router);
+
+  public activeTab: &#x27;login&#x27; | &#x27;register&#x27; &#x3D; &#x27;login&#x27;;
+  public loginForm!: FormGroup;
+  public registerForm!: FormGroup;
+
+  public isLoading: boolean &#x3D; false;
+  public errorMessage: string &#x3D; &#x27;&#x27;;
+  public successMessage: string &#x3D; &#x27;&#x27;;
+
+  ngOnInit(): void {
+    // Si ya está autenticado, redirigir al panel principal
+    if (this.authService.getSnapshot().isAuthenticated) {
+      this.router.navigate([&#x27;/tabs/dashboard&#x27;]);
+      return;
+    }
+
+    this.initForms();
+  }
+
+  private initForms(): void {
+    // Formulario reactivo de Login
+    this.loginForm &#x3D; this.fb.group({
+      email: [&#x27;admin@empresa.com&#x27;, [Validators.required, Validators.email]],
+      password: [&#x27;Admin123!&#x27;, [Validators.required, Validators.minLength(6)]]
+    });
+
+    // Formulario reactivo de Registro con Validador Asíncrono
+    this.registerForm &#x3D; this.fb.group({
+      nombre: [&#x27;&#x27;, [Validators.required, Validators.minLength(3)]],
+      email: [&#x27;&#x27;, {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [uniqueEmailValidator(this.authService)],
+        updateOn: &#x27;blur&#x27;
+      }],
+      password: [&#x27;&#x27;, [Validators.required, Validators.minLength(6)]],
+      rol: [&#x27;Standard&#x27;, Validators.required]
+    });
+  }
+
+  async onLoginSubmit(): Promise&lt;void&gt; {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    this.isLoading &#x3D; true;
+    this.errorMessage &#x3D; &#x27;&#x27;;
+
+    const { email, password } &#x3D; this.loginForm.value;
+    const res &#x3D; await this.authService.login(email, password);
+
+    this.isLoading &#x3D; false;
+    if (res.success) {
+      if (res.user?.rol &#x3D;&#x3D;&#x3D; &#x27;Admin&#x27;) {
+        this.router.navigate([&#x27;/tabs/dashboard&#x27;]);
+      } else {
+        this.router.navigate([&#x27;/tabs/inventory&#x27;]);
+      }
+    } else {
+      this.errorMessage &#x3D; res.message;
+    }
+  }
+
+  async onRegisterSubmit(): Promise&lt;void&gt; {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    this.isLoading &#x3D; true;
+    this.errorMessage &#x3D; &#x27;&#x27;;
+    this.successMessage &#x3D; &#x27;&#x27;;
+
+    // Simulación de registro exitoso
+    setTimeout(() &#x3D;&gt; {
+      this.isLoading &#x3D; false;
+      this.successMessage &#x3D; &#x27;Usuario verificado y registrado correctamente. Puede iniciar sesión ahora.&#x27;;
+      this.activeTab &#x3D; &#x27;login&#x27;;
+      this.loginForm.patchValue({
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password
+      });
+    }, 700);
+  }
+
+  // Accesos rápidos para el profesor / evaluador
+  quickLogin(role: &#x27;Admin&#x27; | &#x27;Standard&#x27;): void {
+    if (role &#x3D;&#x3D;&#x3D; &#x27;Admin&#x27;) {
+      this.loginForm.patchValue({
+        email: &#x27;admin@empresa.com&#x27;,
+        password: &#x27;Admin123!&#x27;
+      });
+    } else {
+      this.loginForm.patchValue({
+        email: &#x27;usuario@empresa.com&#x27;,
+        password: &#x27;User123!&#x27;
+      });
+    }
+    this.onLoginSubmit();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ion-content class&#x3D;&quot;login-page-content&quot; [fullscreen]&#x3D;&quot;true&quot;&gt;
+  &lt;main class&#x3D;&quot;login-wrapper&quot;&gt;
+    &lt;div class&#x3D;&quot;login-box&quot;&gt;
+      &lt;!-- Encabezado con información institucional --&gt;
+      &lt;header class&#x3D;&quot;brand-header&quot;&gt;
+        &lt;div class&#x3D;&quot;logo-circle&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+          &lt;span class&#x3D;&quot;logo-icon&quot;&gt;⚡&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h1 class&#x3D;&quot;app-title&quot;&gt;Sistema de Gestión Multiplataforma&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;app-subtitle&quot;&gt;Módulo: Desarrollo de Interfaces (0488) | DAM&lt;/p&gt;
+      &lt;/header&gt;
+
+      &lt;!-- Selector declarativo de modo (Iniciar Sesión / Registro) --&gt;
+      &lt;nav class&#x3D;&quot;segment-nav&quot; aria-label&#x3D;&quot;Selección de modo de acceso&quot;&gt;
+        &lt;div class&#x3D;&quot;custom-tabs-switch&quot; role&#x3D;&quot;tablist&quot;&gt;
+          &lt;button 
+            type&#x3D;&quot;button&quot; 
+            role&#x3D;&quot;tab&quot; 
+            [attr.aria-selected]&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;login&#x27;&quot;
+            [class.active]&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;login&#x27;&quot;
+            (click)&#x3D;&quot;activeTab &#x3D; &#x27;login&#x27;&quot;
+            id&#x3D;&quot;tab-login&quot;
+            aria-controls&#x3D;&quot;panel-login&quot;
+          &gt;
+            Iniciar Sesión
+          &lt;/button&gt;
+          &lt;button 
+            type&#x3D;&quot;button&quot; 
+            role&#x3D;&quot;tab&quot; 
+            [attr.aria-selected]&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;register&#x27;&quot;
+            [class.active]&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;register&#x27;&quot;
+            (click)&#x3D;&quot;activeTab &#x3D; &#x27;register&#x27;&quot;
+            id&#x3D;&quot;tab-register&quot;
+            aria-controls&#x3D;&quot;panel-register&quot;
+          &gt;
+            Registro &amp; Validación Asíncrona
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/nav&gt;
+
+      &lt;!-- Notificaciones de estado / feedback accesible --&gt;
+      &lt;div 
+        *ngIf&#x3D;&quot;errorMessage&quot; 
+        class&#x3D;&quot;alert-box error&quot; 
+        role&#x3D;&quot;alert&quot; 
+        aria-live&#x3D;&quot;assertive&quot;
+      &gt;
+        &lt;span class&#x3D;&quot;alert-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;⚠️&lt;/span&gt;
+        &lt;span&gt;{{ errorMessage }}&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div 
+        *ngIf&#x3D;&quot;successMessage&quot; 
+        class&#x3D;&quot;alert-box success&quot; 
+        role&#x3D;&quot;status&quot; 
+        aria-live&#x3D;&quot;polite&quot;
+      &gt;
+        &lt;span class&#x3D;&quot;alert-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;✓&lt;/span&gt;
+        &lt;span&gt;{{ successMessage }}&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- FORMULARIO 1: INICIO DE SESIÓN --&gt;
+      &lt;section 
+        *ngIf&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;login&#x27;&quot; 
+        id&#x3D;&quot;panel-login&quot; 
+        role&#x3D;&quot;tabpanel&quot; 
+        aria-labelledby&#x3D;&quot;tab-login&quot;
+      &gt;
+        &lt;form [formGroup]&#x3D;&quot;loginForm&quot; (ngSubmit)&#x3D;&quot;onLoginSubmit()&quot; novalidate class&#x3D;&quot;form-container&quot;&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label for&#x3D;&quot;login-email&quot; class&#x3D;&quot;form-label&quot;&gt;Correo Electrónico Corporativo&lt;/label&gt;
+            &lt;input 
+              id&#x3D;&quot;login-email&quot;
+              type&#x3D;&quot;email&quot;
+              formControlName&#x3D;&quot;email&quot;
+              class&#x3D;&quot;form-control&quot;
+              placeholder&#x3D;&quot;ejemplo@empresa.com&quot;
+              autocomplete&#x3D;&quot;email&quot;
+              [class.is-invalid]&#x3D;&quot;loginForm.get(&#x27;email&#x27;)?.touched &amp;&amp; loginForm.get(&#x27;email&#x27;)?.invalid&quot;
+              aria-required&#x3D;&quot;true&quot;
+              aria-describedby&#x3D;&quot;email-error&quot;
+            /&gt;
+            &lt;div 
+              *ngIf&#x3D;&quot;loginForm.get(&#x27;email&#x27;)?.touched &amp;&amp; loginForm.get(&#x27;email&#x27;)?.invalid&quot; 
+              id&#x3D;&quot;email-error&quot; 
+              class&#x3D;&quot;field-error&quot; 
+              role&#x3D;&quot;alert&quot;
+            &gt;
+              &lt;span *ngIf&#x3D;&quot;loginForm.get(&#x27;email&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;El correo es obligatorio.&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;loginForm.get(&#x27;email&#x27;)?.errors?.[&#x27;email&#x27;]&quot;&gt;Formato de correo electrónico no válido.&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label for&#x3D;&quot;login-password&quot; class&#x3D;&quot;form-label&quot;&gt;Contraseña de Acceso&lt;/label&gt;
+            &lt;input 
+              id&#x3D;&quot;login-password&quot;
+              type&#x3D;&quot;password&quot;
+              formControlName&#x3D;&quot;password&quot;
+              class&#x3D;&quot;form-control&quot;
+              placeholder&#x3D;&quot;••••••••&quot;
+              autocomplete&#x3D;&quot;current-password&quot;
+              [class.is-invalid]&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.touched &amp;&amp; loginForm.get(&#x27;password&#x27;)?.invalid&quot;
+              aria-required&#x3D;&quot;true&quot;
+              aria-describedby&#x3D;&quot;password-error&quot;
+            /&gt;
+            &lt;div 
+              *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.touched &amp;&amp; loginForm.get(&#x27;password&#x27;)?.invalid&quot; 
+              id&#x3D;&quot;password-error&quot; 
+              class&#x3D;&quot;field-error&quot; 
+              role&#x3D;&quot;alert&quot;
+            &gt;
+              &lt;span *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;La contraseña es obligatoria.&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;loginForm.get(&#x27;password&#x27;)?.errors?.[&#x27;minlength&#x27;]&quot;&gt;Mínimo 6 caracteres requeridos.&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;button 
+            type&#x3D;&quot;submit&quot; 
+            class&#x3D;&quot;btn-primary-action&quot; 
+            [disabled]&#x3D;&quot;isLoading&quot;
+            aria-label&#x3D;&quot;Acceder al sistema&quot;
+          &gt;
+            &lt;ion-spinner *ngIf&#x3D;&quot;isLoading&quot; name&#x3D;&quot;crescent&quot; class&#x3D;&quot;btn-spinner&quot;&gt;&lt;/ion-spinner&gt;
+            &lt;span *ngIf&#x3D;&quot;!isLoading&quot;&gt;Acceder al Sistema&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/form&gt;
+
+        &lt;!-- ACCESOS RÁPIDOS PARA EVALUACIÓN DOCENTE --&gt;
+        &lt;div class&#x3D;&quot;quick-access-section&quot; role&#x3D;&quot;region&quot; aria-label&#x3D;&quot;Credenciales preconfiguradas para corrección&quot;&gt;
+          &lt;p class&#x3D;&quot;quick-access-title&quot;&gt;Credenciales de Evaluación Directa (Rúbrica RA 1):&lt;/p&gt;
+          &lt;div class&#x3D;&quot;quick-buttons-row&quot;&gt;
+            &lt;button 
+              type&#x3D;&quot;button&quot; 
+              class&#x3D;&quot;quick-btn admin&quot;
+              (click)&#x3D;&quot;quickLogin(&#x27;Admin&#x27;)&quot;
+              aria-label&#x3D;&quot;Entrar como Administrador con un clic&quot;
+            &gt;
+              &lt;span class&#x3D;&quot;role-badge&quot;&gt;ADMIN&lt;/span&gt;
+              &lt;span class&#x3D;&quot;user-desc&quot;&gt;admin&amp;#64;empresa.com&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;button 
+              type&#x3D;&quot;button&quot; 
+              class&#x3D;&quot;quick-btn user&quot;
+              (click)&#x3D;&quot;quickLogin(&#x27;Standard&#x27;)&quot;
+              aria-label&#x3D;&quot;Entrar como Usuario Estándar con un clic&quot;
+            &gt;
+              &lt;span class&#x3D;&quot;role-badge&quot;&gt;ESTÁNDAR&lt;/span&gt;
+              &lt;span class&#x3D;&quot;user-desc&quot;&gt;usuario&amp;#64;empresa.com&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;!-- FORMULARIO 2: REGISTRO CON VALIDACIÓN ASÍNCRONA --&gt;
+      &lt;section 
+        *ngIf&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;register&#x27;&quot; 
+        id&#x3D;&quot;panel-register&quot; 
+        role&#x3D;&quot;tabpanel&quot; 
+        aria-labelledby&#x3D;&quot;tab-register&quot;
+      &gt;
+        &lt;form [formGroup]&#x3D;&quot;registerForm&quot; (ngSubmit)&#x3D;&quot;onRegisterSubmit()&quot; novalidate class&#x3D;&quot;form-container&quot;&gt;
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label for&#x3D;&quot;reg-nombre&quot; class&#x3D;&quot;form-label&quot;&gt;Nombre y Apellidos&lt;/label&gt;
+            &lt;input 
+              id&#x3D;&quot;reg-nombre&quot;
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;nombre&quot;
+              class&#x3D;&quot;form-control&quot;
+              placeholder&#x3D;&quot;Juan Pérez&quot;
+              [class.is-invalid]&#x3D;&quot;registerForm.get(&#x27;nombre&#x27;)?.touched &amp;&amp; registerForm.get(&#x27;nombre&#x27;)?.invalid&quot;
+              aria-required&#x3D;&quot;true&quot;
+            /&gt;
+            &lt;div 
+              *ngIf&#x3D;&quot;registerForm.get(&#x27;nombre&#x27;)?.touched &amp;&amp; registerForm.get(&#x27;nombre&#x27;)?.invalid&quot; 
+              class&#x3D;&quot;field-error&quot;
+            &gt;
+              Mínimo 3 caracteres requeridos.
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;div class&#x3D;&quot;label-row&quot;&gt;
+              &lt;label for&#x3D;&quot;reg-email&quot; class&#x3D;&quot;form-label&quot;&gt;Correo (Validación Asíncrona)&lt;/label&gt;
+              &lt;span 
+                *ngIf&#x3D;&quot;registerForm.get(&#x27;email&#x27;)?.pending&quot; 
+                class&#x3D;&quot;async-pending&quot;
+                aria-live&#x3D;&quot;polite&quot;
+              &gt;
+                Comprobando en base de datos...
+              &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;input 
+              id&#x3D;&quot;reg-email&quot;
+              type&#x3D;&quot;email&quot;
+              formControlName&#x3D;&quot;email&quot;
+              class&#x3D;&quot;form-control&quot;
+              placeholder&#x3D;&quot;nuevo.usuario@empresa.com&quot;
+              [class.is-invalid]&#x3D;&quot;registerForm.get(&#x27;email&#x27;)?.touched &amp;&amp; registerForm.get(&#x27;email&#x27;)?.invalid&quot;
+              aria-required&#x3D;&quot;true&quot;
+              aria-describedby&#x3D;&quot;reg-email-error&quot;
+            /&gt;
+            &lt;div 
+              *ngIf&#x3D;&quot;registerForm.get(&#x27;email&#x27;)?.touched &amp;&amp; registerForm.get(&#x27;email&#x27;)?.invalid&quot; 
+              id&#x3D;&quot;reg-email-error&quot; 
+              class&#x3D;&quot;field-error&quot;
+            &gt;
+              &lt;span *ngIf&#x3D;&quot;registerForm.get(&#x27;email&#x27;)?.errors?.[&#x27;required&#x27;]&quot;&gt;El correo es requerido.&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;registerForm.get(&#x27;email&#x27;)?.errors?.[&#x27;email&#x27;]&quot;&gt;Formato de correo inválido.&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;registerForm.get(&#x27;email&#x27;)?.errors?.[&#x27;emailTaken&#x27;]&quot; class&#x3D;&quot;error-taken&quot;&gt;
+                ⛔ Este correo ya existe en el sistema (Validación asíncrona RA 2).
+              &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;field-hint&quot;&gt;
+              Pruebe a escribir &lt;code&gt;admin&amp;#64;empresa.com&lt;/code&gt; para verificar la validación reactiva asíncrona.
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label for&#x3D;&quot;reg-password&quot; class&#x3D;&quot;form-label&quot;&gt;Contraseña&lt;/label&gt;
+            &lt;input 
+              id&#x3D;&quot;reg-password&quot;
+              type&#x3D;&quot;password&quot;
+              formControlName&#x3D;&quot;password&quot;
+              class&#x3D;&quot;form-control&quot;
+              placeholder&#x3D;&quot;Mínimo 6 caracteres&quot;
+              [class.is-invalid]&#x3D;&quot;registerForm.get(&#x27;password&#x27;)?.touched &amp;&amp; registerForm.get(&#x27;password&#x27;)?.invalid&quot;
+              aria-required&#x3D;&quot;true&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;form-group&quot;&gt;
+            &lt;label for&#x3D;&quot;reg-rol&quot; class&#x3D;&quot;form-label&quot;&gt;Rol Asignado&lt;/label&gt;
+            &lt;select id&#x3D;&quot;reg-rol&quot; formControlName&#x3D;&quot;rol&quot; class&#x3D;&quot;form-control&quot;&gt;
+              &lt;option value&#x3D;&quot;Standard&quot;&gt;Usuario Estándar (Acceso Inventario &amp; NoSQL)&lt;/option&gt;
+              &lt;option value&#x3D;&quot;Admin&quot;&gt;Administrador (Cuadro de Mando &amp; Informes)&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+
+          &lt;button 
+            type&#x3D;&quot;submit&quot; 
+            class&#x3D;&quot;btn-primary-action&quot; 
+            [disabled]&#x3D;&quot;registerForm.invalid || isLoading || registerForm.pending&quot;
+            aria-label&#x3D;&quot;Registrar nuevo usuario&quot;
+          &gt;
+            &lt;ion-spinner *ngIf&#x3D;&quot;isLoading&quot; name&#x3D;&quot;crescent&quot; class&#x3D;&quot;btn-spinner&quot;&gt;&lt;/ion-spinner&gt;
+            &lt;span *ngIf&#x3D;&quot;!isLoading&quot;&gt;Crear Cuenta y Validar&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/section&gt;
+
+      &lt;!-- Pie de página institucional y cumplimiento de normas --&gt;
+      &lt;footer class&#x3D;&quot;login-footer&quot;&gt;
+        &lt;p&gt;Cumplimiento WCAG 2.1 AA | Backend Dual: Supabase (SQL) &amp; Firebase (NoSQL)&lt;/p&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/ion-content&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./login.page.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.login-page-content {
+  --background: #f1f5f9;
+}
+
+.login-wrapper {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+  }
+}
+
+.brand-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  .logo-circle {
+    width: 52px;
+    height: 52px;
+    background: #2563eb;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+
+    .logo-icon {
+      font-size: 1.6rem;
+      color: #ffffff;
+    }
+  }
+
+  .app-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .app-subtitle {
+    font-size: 0.85rem;
+    color: #475569;
+    margin: 0;
+  }
+}
+
+.segment-nav {
+  margin-bottom: 1.25rem;
+
+  .custom-tabs-switch {
+    display: flex;
+    background: #e2e8f0;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+
+    button {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.55rem 0.65rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &amp;.active {
+        background: #ffffff;
+        color: #1e293b;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+      }
+
+      &amp;:focus-visible {
+        outline: 2px solid #2563eb;
+      }
+    }
+  }
+}
+
+.alert-box {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &amp;.error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+  }
+
+  &amp;.success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .async-pending {
+      font-size: 0.75rem;
+      color: #d97706;
+      font-weight: 500;
+    }
+
+    .form-control {
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 0.95rem;
+      color: #0f172a;
+      background: #ffffff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &amp;:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      }
+
+      &amp;.is-invalid {
+        border-color: #dc2626;
+      }
+    }
+
+    .field-error {
+      font-size: 0.78rem;
+      color: #dc2626;
+      font-weight: 500;
+
+      .error-taken {
+        font-weight: 700;
+      }
+    }
+
+    .field-hint {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin: 0.2rem 0 0 0;
+
+      code {
+        background: #f1f5f9;
+        padding: 0.1rem 0.3rem;
+        border-radius: 4px;
+        color: #2563eb;
+      }
+    }
+  }
+
+  .btn-primary-action {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s, opacity 0.2s;
+
+    &amp;:hover:not(:disabled) {
+      background-color: #1d4ed8;
+    }
+
+    &amp;:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    &amp;:focus-visible {
+      outline: 2px solid #0f172a;
+      outline-offset: 2px;
+    }
+
+    .btn-spinner {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.quick-access-section {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed #cbd5e1;
+
+  .quick-access-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #475569;
+    margin: 0 0 0.65rem 0;
+  }
+
+  .quick-buttons-row {
+    display: flex;
+    gap: 0.5rem;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+    }
+
+    .quick-btn {
+      flex: 1;
+      padding: 0.55rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: background-color 0.2s, border-color 0.2s;
+
+      &amp;:hover {
+        background: #f1f5f9;
+        border-color: #94a3b8;
+      }
+
+      &amp;:focus-visible {
+        outline: 2px solid #2563eb;
+      }
+
+      .role-badge {
+        font-size: 0.72rem;
+        font-weight: 800;
+        padding: 0.15rem 0.45rem;
+        border-radius: 4px;
+        letter-spacing: 0.05em;
+      }
+
+      &amp;.admin .role-badge {
+        background: #dbeafe;
+        color: #1e40af;
+      }
+
+      &amp;.user .role-badge {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .user-desc {
+        font-size: 0.74rem;
+        color: #334155;
+        font-family: monospace;
+      }
+    }
+  }
+}
+
+.login-footer {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ion-content class="login-page-content" [fullscreen]="true">  <main class="login-wrapper">    <div class="login-box">      <!-- Encabezado con información institucional -->      <header class="brand-header">        <div class="logo-circle" aria-hidden="true">          <span class="logo-icon">⚡</span>        </div>        <h1 class="app-title">Sistema de Gestión Multiplataforma</h1>        <p class="app-subtitle">Módulo: Desarrollo de Interfaces (0488) | DAM</p>      </header>      <!-- Selector declarativo de modo (Iniciar Sesión / Registro) -->      <nav class="segment-nav" aria-label="Selección de modo de acceso">        <div class="custom-tabs-switch" role="tablist">          <button             type="button"             role="tab"             [attr.aria-selected]="activeTab === \'login\'"            [class.active]="activeTab === \'login\'"            (click)="activeTab = \'login\'"            id="tab-login"            aria-controls="panel-login"          >            Iniciar Sesión          </button>          <button             type="button"             role="tab"             [attr.aria-selected]="activeTab === \'register\'"            [class.active]="activeTab === \'register\'"            (click)="activeTab = \'register\'"            id="tab-register"            aria-controls="panel-register"          >            Registro & Validación Asíncrona          </button>        </div>      </nav>      <!-- Notificaciones de estado / feedback accesible -->      <div         *ngIf="errorMessage"         class="alert-box error"         role="alert"         aria-live="assertive"      >        <span class="alert-icon" aria-hidden="true">⚠️</span>        <span>{{ errorMessage }}</span>      </div>      <div         *ngIf="successMessage"         class="alert-box success"         role="status"         aria-live="polite"      >        <span class="alert-icon" aria-hidden="true">✓</span>        <span>{{ successMessage }}</span>      </div>      <!-- FORMULARIO 1: INICIO DE SESIÓN -->      <section         *ngIf="activeTab === \'login\'"         id="panel-login"         role="tabpanel"         aria-labelledby="tab-login"      >        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" novalidate class="form-container">          <div class="form-group">            <label for="login-email" class="form-label">Correo Electrónico Corporativo</label>            <input               id="login-email"              type="email"              formControlName="email"              class="form-control"              placeholder="ejemplo@empresa.com"              autocomplete="email"              [class.is-invalid]="loginForm.get(\'email\')?.touched && loginForm.get(\'email\')?.invalid"              aria-required="true"              aria-describedby="email-error"            />            <div               *ngIf="loginForm.get(\'email\')?.touched && loginForm.get(\'email\')?.invalid"               id="email-error"               class="field-error"               role="alert"            >              <span *ngIf="loginForm.get(\'email\')?.errors?.[\'required\']">El correo es obligatorio.</span>              <span *ngIf="loginForm.get(\'email\')?.errors?.[\'email\']">Formato de correo electrónico no válido.</span>            </div>          </div>          <div class="form-group">            <label for="login-password" class="form-label">Contraseña de Acceso</label>            <input               id="login-password"              type="password"              formControlName="password"              class="form-control"              placeholder="••••••••"              autocomplete="current-password"              [class.is-invalid]="loginForm.get(\'password\')?.touched && loginForm.get(\'password\')?.invalid"              aria-required="true"              aria-describedby="password-error"            />            <div               *ngIf="loginForm.get(\'password\')?.touched && loginForm.get(\'password\')?.invalid"               id="password-error"               class="field-error"               role="alert"            >              <span *ngIf="loginForm.get(\'password\')?.errors?.[\'required\']">La contraseña es obligatoria.</span>              <span *ngIf="loginForm.get(\'password\')?.errors?.[\'minlength\']">Mínimo 6 caracteres requeridos.</span>            </div>          </div>          <button             type="submit"             class="btn-primary-action"             [disabled]="isLoading"            aria-label="Acceder al sistema"          >            <ion-spinner *ngIf="isLoading" name="crescent" class="btn-spinner"></ion-spinner>            <span *ngIf="!isLoading">Acceder al Sistema</span>          </button>        </form>        <!-- ACCESOS RÁPIDOS PARA EVALUACIÓN DOCENTE -->        <div class="quick-access-section" role="region" aria-label="Credenciales preconfiguradas para corrección">          <p class="quick-access-title">Credenciales de Evaluación Directa (Rúbrica RA 1):</p>          <div class="quick-buttons-row">            <button               type="button"               class="quick-btn admin"              (click)="quickLogin(\'Admin\')"              aria-label="Entrar como Administrador con un clic"            >              <span class="role-badge">ADMIN</span>              <span class="user-desc">admin&#64;empresa.com</span>            </button>            <button               type="button"               class="quick-btn user"              (click)="quickLogin(\'Standard\')"              aria-label="Entrar como Usuario Estándar con un clic"            >              <span class="role-badge">ESTÁNDAR</span>              <span class="user-desc">usuario&#64;empresa.com</span>            </button>          </div>        </div>      </section>      <!-- FORMULARIO 2: REGISTRO CON VALIDACIÓN ASÍNCRONA -->      <section         *ngIf="activeTab === \'register\'"         id="panel-register"         role="tabpanel"         aria-labelledby="tab-register"      >        <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" novalidate class="form-container">          <div class="form-group">            <label for="reg-nombre" class="form-label">Nombre y Apellidos</label>            <input               id="reg-nombre"              type="text"              formControlName="nombre"              class="form-control"              placeholder="Juan Pérez"              [class.is-invalid]="registerForm.get(\'nombre\')?.touched && registerForm.get(\'nombre\')?.invalid"              aria-required="true"            />            <div               *ngIf="registerForm.get(\'nombre\')?.touched && registerForm.get(\'nombre\')?.invalid"               class="field-error"            >              Mínimo 3 caracteres requeridos.            </div>          </div>          <div class="form-group">            <div class="label-row">              <label for="reg-email" class="form-label">Correo (Validación Asíncrona)</label>              <span                 *ngIf="registerForm.get(\'email\')?.pending"                 class="async-pending"                aria-live="polite"              >                Comprobando en base de datos...              </span>            </div>            <input               id="reg-email"              type="email"              formControlName="email"              class="form-control"              placeholder="nuevo.usuario@empresa.com"              [class.is-invalid]="registerForm.get(\'email\')?.touched && registerForm.get(\'email\')?.invalid"              aria-required="true"              aria-describedby="reg-email-error"            />            <div               *ngIf="registerForm.get(\'email\')?.touched && registerForm.get(\'email\')?.invalid"               id="reg-email-error"               class="field-error"            >              <span *ngIf="registerForm.get(\'email\')?.errors?.[\'required\']">El correo es requerido.</span>              <span *ngIf="registerForm.get(\'email\')?.errors?.[\'email\']">Formato de correo inválido.</span>              <span *ngIf="registerForm.get(\'email\')?.errors?.[\'emailTaken\']" class="error-taken">                ⛔ Este correo ya existe en el sistema (Validación asíncrona RA 2).              </span>            </div>            <p class="field-hint">              Pruebe a escribir <code>admin&#64;empresa.com</code> para verificar la validación reactiva asíncrona.            </p>          </div>          <div class="form-group">            <label for="reg-password" class="form-label">Contraseña</label>            <input               id="reg-password"              type="password"              formControlName="password"              class="form-control"              placeholder="Mínimo 6 caracteres"              [class.is-invalid]="registerForm.get(\'password\')?.touched && registerForm.get(\'password\')?.invalid"              aria-required="true"            />          </div>          <div class="form-group">            <label for="reg-rol" class="form-label">Rol Asignado</label>            <select id="reg-rol" formControlName="rol" class="form-control">              <option value="Standard">Usuario Estándar (Acceso Inventario & NoSQL)</option>              <option value="Admin">Administrador (Cuadro de Mando & Informes)</option>            </select>          </div>          <button             type="submit"             class="btn-primary-action"             [disabled]="registerForm.invalid || isLoading || registerForm.pending"            aria-label="Registrar nuevo usuario"          >            <ion-spinner *ngIf="isLoading" name="crescent" class="btn-spinner"></ion-spinner>            <span *ngIf="!isLoading">Crear Cuenta y Validar</span>          </button>        </form>      </section>      <!-- Pie de página institucional y cumplimiento de normas -->      <footer class="login-footer">        <p>Cumplimiento WCAG 2.1 AA | Backend Dual: Supabase (SQL) & Firebase (NoSQL)</p>      </footer>    </div>  </main></ion-content></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ChartWidgetComponent', 'selector': 'app-chart-widget'},{'name': 'DashboardPage', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'ExploreContainerComponent', 'selector': 'app-explore-container'},{'name': 'HelpPage', 'selector': 'app-help'},{'name': 'InventoryPage', 'selector': 'app-inventory'},{'name': 'LoginPage', 'selector': 'app-login'},{'name': 'MetricCardComponent', 'selector': 'app-metric-card'},{'name': 'RealtimePage', 'selector': 'app-realtime'},{'name': 'ReportsPage', 'selector': 'app-reports'},{'name': 'Tab1Page', 'selector': 'app-tab1'},{'name': 'Tab2Page', 'selector': 'app-tab2'},{'name': 'Tab3Page', 'selector': 'app-tab3'},{'name': 'TabsPage', 'selector': 'app-tabs'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'LoginPage'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoginPage.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
