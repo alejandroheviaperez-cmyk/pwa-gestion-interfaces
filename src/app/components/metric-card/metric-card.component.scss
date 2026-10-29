@@ -1,0 +1,134 @@
+.metric-card {
+  background: var(--ion-background-color, #ffffff);
+  border: 1px solid var(--ion-color-step-150, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.08);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(56, 128, 255, 0.35);
+  }
+
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .metric-info {
+    .metric-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ion-color-step-600, #64748b);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .metric-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--ion-text-color, #0f172a);
+      margin: 0 0 0.25rem 0;
+      line-height: 1.2;
+    }
+
+    .metric-subtitle {
+      font-size: 0.8rem;
+      color: var(--ion-color-step-500, #94a3b8);
+      margin: 0;
+    }
+  }
+
+  .metric-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(56, 128, 255, 0.1);
+
+    .icon-indicator {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+  }
+
+  .card-footer {
+    margin-top: 0.85rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--ion-color-step-100, #f1f5f9);
+    font-size: 0.78rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    &.trend-up {
+      color: var(--ion-color-success-shade, #15803d);
+    }
+
+    &.trend-down {
+      color: var(--ion-color-danger-shade, #b91c1c);
+    }
+
+    .trend-arrow {
+      font-weight: bold;
+    }
+  }
+
+  /* Temas de color con alto contraste accesible */
+  &.theme-primary {
+    border-left: 5px solid var(--ion-color-primary, #3880ff);
+    .metric-icon-box {
+      color: var(--ion-color-primary, #3880ff);
+      background: rgba(56, 128, 255, 0.12);
+    }
+  }
+
+  &.theme-success {
+    border-left: 5px solid var(--ion-color-success, #2dd36f);
+    .metric-icon-box {
+      color: var(--ion-color-success, #2dd36f);
+      background: rgba(45, 211, 111, 0.12);
+    }
+  }
+
+  &.theme-warning {
+    border-left: 5px solid var(--ion-color-warning, #ffc409);
+    .metric-icon-box {
+      color: var(--ion-color-warning-shade, #b45309);
+      background: rgba(255, 196, 9, 0.15);
+    }
+  }
+
+  &.theme-danger {
+    border-left: 5px solid var(--ion-color-danger, #eb445a);
+    .metric-icon-box {
+      color: var(--ion-color-danger, #eb445a);
+      background: rgba(235, 68, 90, 0.12);
+    }
+  }
+
+  &.theme-tertiary {
+    border-left: 5px solid var(--ion-color-tertiary, #5260ff);
+    .metric-icon-box {
+      color: var(--ion-color-tertiary, #5260ff);
+      background: rgba(82, 96, 255, 0.12);
+    }
+  }
+}

@@ -1,0 +1,143 @@
+<div class="data-table-container" role="region" [attr.aria-label]="title">
+  <!-- Cabecera de la tabla con buscador y resumen -->
+  <header class="table-header">
+    <div class="header-info">
+      <h3 class="table-title">{{ title }}</h3>
+      <span class="count-badge" aria-live="polite">
+        Mostrando {{ filteredData().length }} resultado(s)
+      </span>
+    </div>
+
+    <div class="search-box">
+      <label for="table-search-input" class="sr-only">Buscar en la tabla</label>
+      <input 
+        id="table-search-input"
+        type="search" 
+        [value]="searchTerm()" 
+        (input)="onSearchChange($event)" 
+        [placeholder]="filterPlaceholder"
+        class="search-input"
+        aria-label="Buscar en la tabla de datos"
+      />
+    </div>
+  </header>
+
+  <!-- Tabla accesible y responsiva -->
+  <div class="table-responsive-wrapper" tabindex="0" role="region" aria-label="Contenedor de datos tabulados">
+    <table class="custom-table" role="table">
+      <thead>
+        <tr role="row">
+          <th 
+            *ngFor="let col of columns" 
+            role="columnheader" 
+            [attr.aria-sort]="sortKey() === col.key ? (sortAsc() ? 'ascending' : 'descending') : 'none'"
+            (click)="col.sortable !== false ? sortBy(col.key) : null"
+            (keydown.enter)="col.sortable !== false ? sortBy(col.key) : null"
+            [class.sortable]="col.sortable !== false"
+            [attr.tabindex]="col.sortable !== false ? 0 : -1"
+            scope="col"
+          >
+            <div class="th-content">
+              <span>{{ col.header }}</span>
+              <span *ngIf="col.sortable !== false" class="sort-icon" aria-hidden="true">
+                {{ sortKey() === col.key ? (sortAsc() ? '▲' : '▼') : '⇅' }}
+              </span>
+            </div>
+          </th>
+          <th *ngIf="canEdit || canDelete" role="columnheader" scope="col" class="actions-header">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr 
+          *ngFor="let row of paginatedData()" 
+          role="row" 
+          tabindex="0"
+          (click)="onSelect(row)"
+          (keydown.enter)="onSelect(row)"
+          class="table-row"
+        >
+          <td *ngFor="let col of columns" role="cell">
+            <!-- Renderizado según tipo de dato -->
+            <ng-container [ngSwitch]="col.type">
+              <span *ngSwitchCase="'currency'" class="price-cell">
+                €{{ row[col.key] | number:'1.2-2' }}
+              </span>
+
+              <span *ngSwitchCase="'status'">
+                <ion-badge [color]="getStatusColor(row[col.key])" class="status-badge">
+                  {{ row[col.key] }}
+                </ion-badge>
+              </span>
+
+              <span *ngSwitchCase="'date'" class="date-cell">
+                {{ row[col.key] | date:'shortDate' }}
+              </span>
+
+              <span *ngSwitchDefault>
+                {{ row[col.key] }}
+              </span>
+            </ng-container>
+          </td>
+
+          <!-- Celda de acciones de fila -->
+          <td *ngIf="canEdit || canDelete" role="cell" class="actions-cell">
+            <button 
+              *ngIf="canEdit"
+              type="button"
+              class="btn-action edit"
+              (click)="emitAction('edit', row, $event)"
+              [attr.aria-label]="'Editar registro ' + (row.codigo || row.nombre)"
+            >
+              Editar
+            </button>
+            <button 
+              *ngIf="canDelete"
+              type="button"
+              class="btn-action delete"
+              (click)="emitAction('delete', row, $event)"
+              [attr.aria-label]="'Eliminar registro ' + (row.codigo || row.nombre)"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+
+        <!-- Estado vacío -->
+        <tr *ngIf="paginatedData().length === 0" role="row">
+          <td [attr.colspan]="columns.length + (canEdit || canDelete ? 1 : 0)" class="empty-state" role="cell">
+            No se encontraron registros que coincidan con la búsqueda.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Controles de paginación accesibles -->
+  <footer class="table-pagination" *ngIf="totalPages() > 1">
+    <button 
+      type="button"
+      class="page-btn" 
+      [disabled]="currentPage() === 1"
+      (click)="setPage(currentPage() - 1)"
+      aria-label="Página anterior"
+    >
+      « Anterior
+    </button>
+    
+    <span class="page-indicator" aria-live="polite">
+      Página {{ currentPage() }} de {{ totalPages() }}
+    </span>
+
+    <button 
+      type="button"
+      class="page-btn" 
+      [disabled]="currentPage() === totalPages()"
+      (click)="setPage(currentPage() + 1)"
+      aria-label="Página siguiente"
+    >
+      Siguiente »
+    </button>
+  </footer>
+</div>
