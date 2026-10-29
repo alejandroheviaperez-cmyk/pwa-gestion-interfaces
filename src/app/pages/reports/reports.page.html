@@ -1,0 +1,131 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Generación de Informes Oficiales (PDF y CSV)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="reports-content">
+  <main class="reports-main" role="main">
+    <header class="reports-header">
+      <div class="header-texts">
+        <h2 class="view-title">Centro de Exportación de Datos</h2>
+        <p class="view-desc">
+          Genere artefactos descargables según normativas oficiales. Exportación en formato vectorial <strong>PDF estandarizado</strong> (mediante jsPDF) y archivo tabular delimitado <strong>CSV (RFC 4180 / UTF-8)</strong>.
+        </p>
+      </div>
+
+      <div class="user-badge" role="status">
+        <span class="badge-role">Rol Requerido: Administrador</span>
+      </div>
+    </header>
+
+    <!-- Indicador de Carga -->
+    <div *ngIf="isLoading()" class="loading-state" role="status" aria-live="polite">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Consolidando datos para los generadores de informes...</p>
+    </div>
+
+    <div *ngIf="!isLoading()" class="reports-body">
+      <!-- TARJETAS DE EXPORTACIÓN DIRECTA (Paso 3.3) -->
+      <section class="export-cards-grid" aria-label="Opciones de descarga">
+        <!-- OPCIÓN 1: PDF CORPORATIVO -->
+        <article class="export-card pdf" role="region" aria-label="Exportar a PDF">
+          <div class="card-icon-box pdf-icon" aria-hidden="true">
+            📄
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Informe Tabulado en PDF</h3>
+            <p class="card-desc">
+              Documento estructurado con membrete corporativo, métricas consolidadas, resumen ejecutivo y detalle de cada activo en inventario paginado.
+            </p>
+            <ul class="features-list">
+              <li>✓ Membrete oficial del módulo DAM</li>
+              <li>✓ KPIs resumidos de valoración monetaria</li>
+              <li>✓ Tabulación con paginación automática</li>
+              <li>✓ Auditoría automática del evento en Firestore</li>
+            </ul>
+          </div>
+          <footer class="card-actions">
+            <button 
+              type="button" 
+              class="btn-export pdf-btn"
+              (click)="downloadPdf()"
+              [disabled]="isExportingPdf()"
+              aria-label="Descargar informe completo en formato PDF"
+            >
+              <ion-spinner *ngIf="isExportingPdf()" name="crescent"></ion-spinner>
+              <span *ngIf="!isExportingPdf()">Descargar Informe PDF</span>
+            </button>
+          </footer>
+        </article>
+
+        <!-- OPCIÓN 2: CSV TABULAR -->
+        <article class="export-card csv" role="region" aria-label="Exportar a CSV">
+          <div class="card-icon-box csv-icon" aria-hidden="true">
+            📊
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Exportación de Datos en CSV</h3>
+            <p class="card-desc">
+              Fichero plano delimitado por puntos y comas con codificación UTF-8 BOM, compatible con Microsoft Excel, Google Sheets y sistemas ERP.
+            </p>
+            <ul class="features-list">
+              <li>✓ Estándar RFC 4180 compatible</li>
+              <li>✓ Codificación UTF-8 con BOM para tildes y símbolos</li>
+              <li>✓ Descarga instantánea en el navegador</li>
+              <li>✓ Registro del suceso en telemetría NoSQL</li>
+            </ul>
+          </div>
+          <footer class="card-actions">
+            <button 
+              type="button" 
+              class="btn-export csv-btn"
+              (click)="downloadCsv()"
+              [disabled]="isExportingCsv()"
+              aria-label="Descargar hoja de cálculo en formato CSV"
+            >
+              <ion-spinner *ngIf="isExportingCsv()" name="crescent"></ion-spinner>
+              <span *ngIf="!isExportingCsv()">Descargar Archivo CSV</span>
+            </button>
+          </footer>
+        </article>
+      </section>
+
+      <!-- VISTA PREVIA DE LOS DATOS CONSOLIDADOS -->
+      <section class="preview-section" aria-label="Vista previa del conjunto de datos">
+        <header class="preview-header">
+          <h3 class="preview-title">Vista Previa de Datos a Incluir</h3>
+          <span class="preview-count">{{ records().length }} registros preparados para exportación</span>
+        </header>
+
+        <div class="preview-table-container">
+          <table class="preview-table" role="table">
+            <thead>
+              <tr role="row">
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rec of records().slice(0, 5)" role="row">
+                <td><strong>{{ rec.codigo }}</strong></td>
+                <td>{{ rec.nombre }}</td>
+                <td>{{ rec.categoria }}</td>
+                <td>€{{ rec.precio | number:'1.2-2' }}</td>
+                <td>{{ rec.stock }} uds.</td>
+                <td>
+                  <span class="status-indicator">{{ rec.estado }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="preview-note">... y {{ records().length - 5 }} registros más incluidos en la descarga.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</ion-content>

@@ -1,0 +1,110 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Telemetría en Tiempo Real (Firebase NoSQL)</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="triggerTestEvent()" [disabled]="isEmitting()" color="light" fill="solid" aria-label="Enviar evento de prueba a Firestore">
+        <ion-spinner *ngIf="isEmitting()" name="dots"></ion-spinner>
+        <span *ngIf="!isEmitting()">+ Emitir Evento NoSQL</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="realtime-content">
+  <main class="realtime-main" role="main">
+    <!-- Encabezado de la vista con indicador de WebSocket / Firestore Stream -->
+    <header class="realtime-header">
+      <div class="header-texts">
+        <h2 class="view-title">Flujo de Auditoría Distribuida</h2>
+        <p class="view-desc">
+          Conexión activa con <strong>Firebase Firestore</strong>. Los cambios realizados por cualquier usuario o sesión se reflejan instantáneamente sin recargar la página.
+        </p>
+      </div>
+
+      <div class="connection-status-pill" [class.connected]="isConnected()" role="status" aria-live="polite">
+        <span class="pulse-indicator"></span>
+        <span class="status-label">{{ isConnected() ? 'Firestore Conectado en Tiempo Real' : 'Conectando...' }}</span>
+      </div>
+    </header>
+
+    <!-- Barra de Filtros de Eventos -->
+    <section class="filter-strip" role="region" aria-label="Filtro de tipos de acción">
+      <span class="filter-title">Filtrar por Acción:</span>
+      <div class="chips-row">
+        <button 
+          type="button" 
+          class="chip-btn" 
+          [class.active]="selectedFilter() === 'TODAS'"
+          (click)="selectedFilter.set('TODAS')"
+        >
+          Todas ({{ logs().length }})
+        </button>
+        <button 
+          type="button" 
+          class="chip-btn" 
+          [class.active]="selectedFilter() === 'LOGIN'"
+          (click)="selectedFilter.set('LOGIN')"
+        >
+          Inicios de Sesión
+        </button>
+        <button 
+          type="button" 
+          class="chip-btn" 
+          [class.active]="selectedFilter() === 'CREAR_REGISTRO'"
+          (click)="selectedFilter.set('CREAR_REGISTRO')"
+        >
+          Altas SQL
+        </button>
+        <button 
+          type="button" 
+          class="chip-btn" 
+          [class.active]="selectedFilter() === 'EXPORTAR_PDF'"
+          (click)="selectedFilter.set('EXPORTAR_PDF')"
+        >
+          Informes PDF
+        </button>
+        <button 
+          type="button" 
+          class="chip-btn" 
+          [class.active]="selectedFilter() === 'EXPORTAR_CSV'"
+          (click)="selectedFilter.set('EXPORTAR_CSV')"
+        >
+          Informes CSV
+        </button>
+      </div>
+    </section>
+
+    <!-- Lista de Auditoría NoSQL en Vivo -->
+    <section class="logs-feed" aria-label="Historial de eventos en vivo">
+      <article *ngFor="let item of getFilteredLogs()" class="log-card" role="article" tabindex="0">
+        <div class="card-left">
+          <div class="log-action-header">
+            <ion-badge [color]="getActionBadgeColor(item.accion)" class="action-badge">
+              {{ item.accion }}
+            </ion-badge>
+            <span class="entity-name">Entidad: {{ item.entidad }}</span>
+          </div>
+
+          <p class="log-details">{{ item.detalles }}</p>
+
+          <div class="log-meta">
+            <span class="meta-user">Usuario: <strong>{{ item.usuario }}</strong></span>
+            <span class="meta-separator">•</span>
+            <span class="meta-role">Rol: {{ item.rol }}</span>
+          </div>
+        </div>
+
+        <div class="card-right">
+          <time [attr.datetime]="item.timestamp" class="log-time">
+            {{ item.timestamp | date:'medium' }}
+          </time>
+          <span class="doc-id" *ngIf="item.id">Doc ID: {{ item.id.substring(0, 10) }}...</span>
+        </div>
+      </article>
+
+      <div *ngIf="getFilteredLogs().length === 0" class="empty-feed">
+        <p>No hay eventos registrados para el filtro seleccionado.</p>
+      </div>
+    </section>
+  </main>
+</ion-content>

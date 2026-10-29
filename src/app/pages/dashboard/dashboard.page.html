@@ -1,0 +1,151 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Cuadro de Mando Ejecutivo (Admin)</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="loadConsolidatedData()" aria-label="Actualizar datos consolidados">
+        Actualizar
+      </ion-button>
+      <ion-button (click)="logout()" fill="clear" color="light" aria-label="Cerrar sesión actual">
+        Salir
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="dashboard-content">
+  <main class="dashboard-main" role="main">
+    <!-- Encabezado con información de contexto -->
+    <header class="page-intro">
+      <div class="intro-text">
+        <h2 class="section-title">Consolidación de Métricas Empresariales</h2>
+        <p class="section-desc">
+          Orquestación asíncrona dual: Persistencia SQL vía <strong>Supabase REST</strong> y telemetría en tiempo real vía <strong>Firebase Firestore (NoSQL)</strong>.
+        </p>
+      </div>
+
+      <div class="user-pill" role="status">
+        <span class="user-dot"></span>
+        <span>Sesión: <strong>{{ (authService.currentUser$ | async)?.nombre }}</strong></span>
+        <ion-badge color="tertiary">Rol: Administrador</ion-badge>
+      </div>
+    </header>
+
+    <!-- Indicador de Carga Asíncrona -->
+    <div *ngIf="isLoading()" class="loading-state" role="status" aria-live="polite">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+      <p>Consultando concurrentemente orígenes SQL (Supabase) y NoSQL (Firebase)...</p>
+    </div>
+
+    <div *ngIf="!isLoading()" class="dashboard-body">
+      <!-- BARRA DE FILTROS EN TIEMPO REAL (Paso 3.2 y RA 5) -->
+      <section class="filters-bar" role="search" aria-label="Filtros del cuadro de mando">
+        <div class="filter-group">
+          <label for="category-filter-select" class="filter-label">Filtrar por Categoría:</label>
+          <select 
+            id="category-filter-select"
+            class="filter-select" 
+            [value]="selectedCategory()"
+            (change)="setCategoryFilter($any($event.target).value)"
+            aria-label="Filtrar métricas por categoría"
+          >
+            <option *ngFor="let cat of categories()" [value]="cat">
+              {{ cat }}
+            </option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="status-filter-select" class="filter-label">Filtrar por Estado:</label>
+          <select 
+            id="status-filter-select"
+            class="filter-select" 
+            [value]="selectedStatus()"
+            (change)="setStatusFilter($any($event.target).value)"
+            aria-label="Filtrar métricas por estado"
+          >
+            <option value="TODOS">Todos los Estados</option>
+            <option value="Activo">Activos</option>
+            <option value="Bajo Stock">Bajo Stock (&lt; 5)</option>
+            <option value="Agotado">Agotados (0)</option>
+            <option value="En Revisión">En Revisión</option>
+          </select>
+        </div>
+
+        <div class="active-filter-summary">
+          <span>Registros activos filtrados: <strong>{{ filteredRecords().length }}</strong> de {{ records().length }}</span>
+        </div>
+      </section>
+
+      <!-- TARJETAS MÉTRICAS / KPIS (Componente Reutilizable 2 - RA 3) -->
+      <section class="kpi-grid" aria-label="Indicadores clave de rendimiento">
+        <app-metric-card
+          title="Total Activos (SQL)"
+          [value]="summary().totalRegistros"
+          subtitle="Registros procesados en Supabase"
+          color="primary"
+          [trend]="{ percentage: 12.4, isPositive: true }"
+        ></app-metric-card>
+
+        <app-metric-card
+          title="Stock Total Físico"
+          [value]="summary().stockTotal + ' uds.'"
+          subtitle="Disponibilidad en almacén"
+          color="success"
+          [trend]="{ percentage: 5.2, isPositive: true }"
+        ></app-metric-card>
+
+        <app-metric-card
+          title="Valoración de Inventario"
+          [value]="'€' + (summary().valorTotalInventario | number:'1.2-2')"
+          subtitle="Cálculo monetario consolidado"
+          color="tertiary"
+          [trend]="{ percentage: 8.7, isPositive: true }"
+        ></app-metric-card>
+
+        <app-metric-card
+          title="Auditoría NoSQL (Firebase)"
+          [value]="summary().logsEnTiempoReal"
+          subtitle="Eventos capturados en Firestore"
+          color="warning"
+          [trend]="{ percentage: 19.3, isPositive: true }"
+        ></app-metric-card>
+      </section>
+
+      <!-- PANELES DE GRÁFICOS VISUALES (Chart.js - RA 5) -->
+      <section class="charts-grid" aria-label="Visualizaciones analíticas">
+        <div class="chart-column main">
+          <app-chart-widget
+            type="bar"
+            [labels]="barChartLabels()"
+            [datasets]="barChartDatasets()"
+            title="Stock y Valoración Monetaria por Categoría"
+            subtitle="Representación comparativa entre existencias físicas y valor contable"
+            [height]="320"
+          ></app-chart-widget>
+        </div>
+
+        <div class="chart-column side">
+          <app-chart-widget
+            type="doughnut"
+            [labels]="doughnutLabels()"
+            [datasets]="doughnutDatasets()"
+            title="Distribución del Estado Operativo"
+            subtitle="Proporción según disponibilidad de existencias"
+            [height]="320"
+          ></app-chart-widget>
+        </div>
+
+        <div class="chart-column full">
+          <app-chart-widget
+            type="line"
+            [labels]="lineChartLabels()"
+            [datasets]="lineChartDatasets()"
+            title="Telemetría de Eventos en Tiempo Real (Firebase Firestore)"
+            subtitle="Frecuencia de transacciones y auditoría distribuida capturada"
+            [height]="240"
+          ></app-chart-widget>
+        </div>
+      </section>
+    </div>
+  </main>
+</ion-content>

@@ -1,0 +1,188 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Manual de Usuario y Documentación Técnica (RA 6)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="help-content">
+  <main class="help-main" role="main">
+    <header class="help-header">
+      <h2 class="main-title">Sistema de Ayuda Contextual y Especificación Técnica</h2>
+      <p class="main-desc">
+        Guía integral del operador, arquitectura de datos (Supabase & Firebase) y certificación de accesibilidad WCAG 2.1 AA.
+      </p>
+
+      <!-- Selector de Secciones -->
+      <nav class="nav-sections" aria-label="Secciones del manual de ayuda">
+        <button 
+          type="button" 
+          class="nav-tab" 
+          [class.active]="activeSection() === 'roles'"
+          (click)="setSection('roles')"
+        >
+          1. Roles & Credenciales
+        </button>
+        <button 
+          type="button" 
+          class="nav-tab" 
+          [class.active]="activeSection() === 'data'"
+          (click)="setSection('data')"
+        >
+          2. Fuentes Duales (SQL & NoSQL)
+        </button>
+        <button 
+          type="button" 
+          class="nav-tab" 
+          [class.active]="activeSection() === 'architecture'"
+          (click)="setSection('architecture')"
+        >
+          3. Arquitectura & Componentes
+        </button>
+        <button 
+          type="button" 
+          class="nav-tab" 
+          [class.active]="activeSection() === 'accessibility'"
+          (click)="setSection('accessibility')"
+        >
+          4. Accesibilidad WCAG 2.1 AA
+        </button>
+        <button 
+          type="button" 
+          class="nav-tab" 
+          [class.active]="activeSection() === 'lighthouse'"
+          (click)="setSection('lighthouse')"
+        >
+          5. Auditoría Lighthouse
+        </button>
+      </nav>
+    </header>
+
+    <!-- SECCIÓN 1: ROLES Y CREDENCIALES -->
+    <section *ngIf="activeSection() === 'roles'" class="help-section" aria-labelledby="sec-roles-title">
+      <h3 id="sec-roles-title" class="sec-title">1. Sistema de Control de Acceso por Roles (RBAC)</h3>
+      <p class="sec-text">
+        La plataforma implementa un modelo de autorización estricto mediante <strong>Angular Route Guards (authGuard y adminGuard)</strong> que aíslan las áreas de negocio según el perfil del usuario autenticado:
+      </p>
+
+      <div class="credentials-grid">
+        <div class="cred-card admin">
+          <div class="card-top">
+            <span class="role-pill admin">Rol Administrador</span>
+            <span class="access-level">Acceso Total</span>
+          </div>
+          <h4 class="card-name">Director / Administrador General</h4>
+          <dl class="cred-dl">
+            <dt>Correo electrónico:</dt>
+            <dd><code>admin&#64;empresa.com</code></dd>
+            <dt>Contraseña:</dt>
+            <dd><code>Admin123!</code></dd>
+            <dt>Capacidades:</dt>
+            <dd>Cuadro de mando analítico interactivo, filtros en tiempo real, CRUD completo de inventario SQL, telemetría NoSQL y exportación oficial a PDF y CSV.</dd>
+          </dl>
+        </div>
+
+        <div class="cred-card standard">
+          <div class="card-top">
+            <span class="role-pill standard">Rol Usuario Estándar</span>
+            <span class="access-level">Operador</span>
+          </div>
+          <h4 class="card-name">Operador de Inventario y Activos</h4>
+          <dl class="cred-dl">
+            <dt>Correo electrónico:</dt>
+            <dd><code>usuario&#64;empresa.com</code></dd>
+            <dt>Contraseña:</dt>
+            <dd><code>User123!</code></dd>
+            <dt>Capacidades:</dt>
+            <dd>Consulta de inventario, alta de nuevos registros con validación asíncrona, visualización de eventos NoSQL en vivo y manual de ayuda.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: FUENTES DUALES -->
+    <section *ngIf="activeSection() === 'data'" class="help-section" aria-labelledby="sec-data-title">
+      <h3 id="sec-data-title" class="sec-title">2. Consumo Asíncrono Dual: SQL (Supabase) & NoSQL (Firebase)</h3>
+      <p class="sec-text">
+        El sistema integra dos fuentes de persistencia desacopladas y complementarias, gestionadas mediante orquestación concurrente con <strong>RxJS forkJoin</strong>:
+      </p>
+
+      <div class="tech-comparison">
+        <div class="tech-box">
+          <h4>Base Relacional SQL: Supabase REST API</h4>
+          <ul>
+            <li><strong>Entidad gestionada:</strong> Registros empresariales e inventario de activos.</li>
+            <li><strong>URL Endpoint:</strong> <code>https://cpgpvryfcmeedkgnprqs.supabase.co/rest/v1/</code></li>
+            <li><strong>Mecanismo de consumo:</strong> Cliente SDK oficial <code>@supabase/supabase-js</code> con autenticación mediante apikey pública y validaciones asíncronas de unicidad para claves SKU.</li>
+            <li><strong>Tolerancia a fallos:</strong> Mecanismo de fallback reactivo que preserva la operatividad offline y la réplica sincronizada.</li>
+          </ul>
+        </div>
+
+        <div class="tech-box">
+          <h4>Base NoSQL Orientada a Documentos: Firebase Firestore</h4>
+          <ul>
+            <li><strong>Entidad gestionada:</strong> Bitácora y telemetría de eventos de auditoría (Audit Logs).</li>
+            <li><strong>Project ID:</strong> <code>gestion-nosql</code></li>
+            <li><strong>Mecanismo de consumo:</strong> Subscripciones reactivas de flujo abierto <code>onSnapshot</code> conectadas a observables de RxJS.</li>
+            <li><strong>Reactividad en tiempo real:</strong> Cada inserción o evento producido en cualquier cliente se sincroniza de forma inmediata sin recarga de pantalla.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: ARQUITECTURA -->
+    <section *ngIf="activeSection() === 'architecture'" class="help-section" aria-labelledby="sec-arch-title">
+      <h3 id="sec-arch-title" class="sec-title">3. Arquitectura Basada en Componentes Reutilizables (RA 3)</h3>
+      <p class="sec-text">
+        La aplicación sigue estrictamente el patrón arquitectónico <strong>MVVM / Standalone Components</strong> con detección de cambios optimizada mediante <code>ChangeDetectionStrategy.OnPush</code> y Angular Signals:
+      </p>
+
+      <div class="components-breakdown">
+        <article class="comp-item">
+          <h4>DataTableComponent (app-data-table)</h4>
+          <p>Componente agnóstico e instanciable para visualización de colecciones tabuladas. Recibe <code>@Input() data</code> y <code>@Input() columns</code>, y notifica eventos al padre mediante <code>@Output() rowAction</code>. Incluye motor de búsqueda en tiempo real, ordenación multicriterio y paginador accesible.</p>
+        </article>
+
+        <article class="comp-item">
+          <h4>MetricCardComponent (app-metric-card)</h4>
+          <p>Widget estadístico de alto impacto visual para indicadores clave (KPIs). Admite valores, tendencias porcentuales, paletas cromáticas accesibles y emisión de eventos de pulsación.</p>
+        </article>
+
+        <article class="comp-item">
+          <h4>ChartWidgetComponent (app-chart-widget)</h4>
+          <p>Envoltorio declarativo sobre la librería Chart.js. Gestiona el ciclo de vida del canvas destruyendo adecuadamente las instancias en <code>ngOnDestroy()</code> para evitar fugas de memoria (memory leaks).</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: ACCESIBILIDAD WCAG -->
+    <section *ngIf="activeSection() === 'accessibility'" class="help-section" aria-labelledby="sec-wcag-title">
+      <h3 id="sec-wcag-title" class="sec-title">4. Cumplimiento Normativo WCAG 2.1 Nivel AA (RA 4)</h3>
+      <p class="sec-text">
+        La interfaz ha sido diseñada aplicando los principios fundamentales de accesibilidad web (Perceptible, Operable, Comprensible y Robusto):
+      </p>
+
+      <ul class="wcag-checklist">
+        <li><strong>Navegación completa por teclado:</strong> Todos los elementos interactivos cuentan con atributos <code>tabindex</code> lógicos y estilos de foco visibles de alto contraste mediante la pseudo-clase <code>:focus-visible</code>.</li>
+        <li><strong>Contraste cromático reglamentario:</strong> Ratio de contraste superior a 4.5:1 en textos normales y 3:1 en tipografías grandes e iconos de control.</li>
+        <li><strong>Etiquetas WAI-ARIA semánticas:</strong> Uso sistemático de <code>role="table"</code>, <code>role="region"</code>, <code>role="alert"</code>, <code>aria-live="polite"</code> y descripciones <code>aria-label</code> en todos los componentes.</li>
+        <li><strong>Diseño adaptativo Mobile-First:</strong> Maquetación con CSS Grid y Flexbox sin distorsión anatómica entre monitores de escritorio, tabletas y teléfonos inteligentes.</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN 5: LIGHTHOUSE -->
+    <section *ngIf="activeSection() === 'lighthouse'" class="help-section" aria-labelledby="sec-lh-title">
+      <h3 id="sec-lh-title" class="sec-title">5. Protocolo de Auditoría Google Lighthouse (&gt; 90/100)</h3>
+      <p class="sec-text">
+        Para verificar la puntuación exigida en el criterio de evaluación de la actividad (&gt;90 en Accessibility y Best Practices):
+      </p>
+
+      <ol class="steps-list">
+        <li>Abra la aplicación en el navegador Google Chrome.</li>
+        <li>Abra las Herramientas de Desarrollador (pulsando <kbd>F12</kbd> o <kbd>Ctrl + Shift + I</kbd>).</li>
+        <li>Seleccione la pestaña <strong>Lighthouse</strong>.</li>
+        <li>Marque las casillas <em>Accessibility</em>, <em>Best Practices</em> y <em>SEO</em> en modo Dispositivo Móvil o Desktop.</li>
+        <li>Haga clic en <strong>Analyze page load</strong> para certificar la puntuación superior a 90/100.</li>
+      </ol>
+    </section>
+  </main>
+</ion-content>

@@ -1,0 +1,217 @@
+.realtime-content {
+  --background: #f8fafc;
+}
+
+.realtime-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem 1rem;
+}
+
+.realtime-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .view-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .view-desc {
+    font-size: 0.9rem;
+    color: #475569;
+    margin: 0;
+    max-width: 680px;
+  }
+
+  .connection-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 0.45rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    color: #64748b;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+    .pulse-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #eab308;
+    }
+
+    &.connected {
+      color: #166534;
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+
+      .pulse-indicator {
+        background: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+      }
+    }
+  }
+}
+
+.filter-strip {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .filter-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .chip-btn {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.active {
+        background: #2563eb;
+        color: #ffffff;
+        border-color: #2563eb;
+      }
+
+      &:hover:not(.active) {
+        background: #e2e8f0;
+      }
+    }
+  }
+}
+
+.logs-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+
+  .log-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    transition: transform 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      border-color: #94a3b8;
+      transform: translateX(3px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid #2563eb;
+    }
+
+    @media (max-width: 650px) {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+
+      .log-action-header {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+
+        .action-badge {
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+        }
+
+        .entity-name {
+          font-size: 0.82rem;
+          color: #64748b;
+          font-weight: 500;
+        }
+      }
+
+      .log-details {
+        font-size: 0.92rem;
+        color: #1e293b;
+        font-weight: 500;
+        margin: 0.2rem 0;
+      }
+
+      .log-meta {
+        font-size: 0.8rem;
+        color: #64748b;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        .meta-separator {
+          color: #cbd5e1;
+        }
+      }
+    }
+
+    .card-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      @media (max-width: 650px) {
+        text-align: left;
+      }
+
+      .log-time {
+        font-size: 0.8rem;
+        color: #475569;
+        font-weight: 600;
+      }
+
+      .doc-id {
+        font-size: 0.72rem;
+        color: #94a3b8;
+        font-family: monospace;
+      }
+    }
+  }
+
+  .empty-feed {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #64748b;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px dashed #cbd5e1;
+  }
+}
