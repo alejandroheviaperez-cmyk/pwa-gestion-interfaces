@@ -1,0 +1,26 @@
+<article 
+  class="metric-card" 
+  [ngClass]="'theme-' + color"
+  role="region" 
+  [attr.aria-label]="title + ': ' + value"
+  tabindex="0"
+  (click)="onClick()"
+  (keydown)="onKeyDown($event)"
+>
+  <div class="card-body">
+    <div class="metric-info">
+      <span class="metric-title">{{ title }}</span>
+      <h4 class="metric-value">{{ value }}</h4>
+      <p *ngIf="subtitle" class="metric-subtitle">{{ subtitle }}</p>
+    </div>
+
+    <div class="metric-icon-box" aria-hidden="true">
+      <span class="icon-indicator"></span>
+    </div>
+  </div>
+
+  <footer *ngIf="trend" class="card-footer" [ngClass]="trend.isPositive ? 'trend-up' : 'trend-down'">
+    <span class="trend-arrow" aria-hidden="true">{{ trend.isPositive ? '↑' : '↓' }}</span>
+    <span class="trend-text">{{ trend.percentage }}% respecto al mes anterior</span>
+  </footer>
+</article>
